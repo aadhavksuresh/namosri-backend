@@ -1,35 +1,33 @@
 const validation = require('./validation');
 const models = require('../models/models');
 const bcrypt = require('bcrypt');
+const responseCodes = require('../models/responseCodes');
 
 module.exports = {
 //  ============= used by admin only for providing access to another user===============
     signup: function(params) {
         return new Promise((resolve, reject) => {
             if (!params.username || !params.password) {
-                reject('Fill are parameters');
+                reject(responseCodes.invalidRequest);
             } else {
                 validation.userExists(params.username)
                     .then(result => {
                         if (result) {
-                            reject('Username exists');
+                            reject(responseCodes.userAlreadyExists);
                         } else { 
                             bcrypt.hash(params.password, 2).then((hash) => {
                                 params.password = hash;
                                 models.user.create(params).then(user => {
                                     resolve(user.dataValues);
-                                }).catch((err) => {
-                                    console.error('Error occured while creating user:', err);
-                                    reject('Server side error');
+                                }).catch((err) => {                                    
+                                    reject(responseCodes.internalError);
                                 });
-                            }).catch((err) => {
-                                console.error('Error encrypting password', err);
-                                reject('Server side error');
+                            }).catch((err) => {                                
+                                reject(responseCodes.internalError);
                             });             
                         }
-                    }).catch(err => {
-                        console.error('User validation error', err);
-                        reject('Server side error');
+                    }).catch(err => {                        
+                        reject(responseCodes.internalError);
                     });
             }
         });
@@ -38,7 +36,7 @@ module.exports = {
     loginUser: function(params) {
         return new Promise((resolve, reject) => {
             if (!params.username || !params.password) {
-                reject('Missing params');
+                reject(responseCodes.invalidRequest);
             } else {
                 validation.userExists(params.username)
                     .then(result => {
@@ -55,22 +53,20 @@ module.exports = {
                                                 console.log(user.dataValues);
                                                 resolve(user.dataValues);
                                             } else {
-                                                reject('Password mismatch');
+                                                reject(responseCodes.passwordMismatch);
                                             }
-                                    }).catch((err) => {
-                                        console.error('Error decrypting password', err);
-                                        reject('Server side error');
+                                    }).catch((err) => {                                        
+                                        reject(responseCodes.internalError);
                                     });
                                 }
                             }).catch(err => {
-                                reject('Server side Error');
+                                reject(responseCodes.internalError);
                             })
                         } else {
-                            reject('User does not exist');
+                            reject(responseCodes.internalError);
                         }
-                    }).catch(err => {
-                        console.error('User validation error', err);
-                        reject('Server side error');
+                    }).catch(err => {                        
+                        reject(responseCodes.internalError);
                     });
             }
         });
@@ -79,7 +75,7 @@ module.exports = {
     getUser: function(params) {
         return new Promise((resolve, reject) => {
             if (!params.username) {
-                reject('Invalid Request');
+                reject(responseCodes.invalidRequest);
             } else {
                 validation.userExists(params.username)
                     .then(result => {
@@ -93,14 +89,13 @@ module.exports = {
                                     resolve(user.dataValues);
                                 }
                             }).catch(err => {
-                                reject('Server side Error');
+                                reject(responseCodes.internalError);
                             })
                         } else {
-                            reject('User does not exist');
+                            reject(responseCodes.internalError);
                         }
-                    }).catch(err => {
-                        console.error('User validation error', err);
-                        reject('Server side error');
+                    }).catch(err => {                        
+                        reject(responseCodes.internalError);
                     });
             }
         });
@@ -109,7 +104,7 @@ module.exports = {
     updateUser: function(params) {
         return new Promise((resolve, reject) => {
             if (!params.username) {
-                reject('Missing Params');
+                reject(responseCodes.invalidRequest);
             } else {
                 models.user.findOne({
                     where: {
@@ -121,15 +116,13 @@ module.exports = {
                             .then(user => {
                                 resolve(user.dataValues);
                             }).catch(err => {
-                                console.error('Error occured at saveUser', err);
-                                reject('Server side error');
+                                reject(responseCodes.internalError);
                             });
                     } else {
-                        reject('No such User exist');
+                        reject(responseCodes.noUserExists);
                     }
                 }).catch(err => {
-                    console.error('Error occured at saveUser', err);
-                    reject('Server side error');
+                    reject(responseCodes.internalError);
                 });
             }
         });

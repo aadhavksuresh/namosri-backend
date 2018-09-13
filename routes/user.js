@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var userService = require('../services/user');
 var tokenizer = require('../services/tokenizer');
+var response = require('../models/response');
+var responseCodes = require('../models/responseCodes');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -16,19 +18,18 @@ router.post('/signup', function(req, res, next) {
     username: "narendra",
     password: "kumawat"
   }
+ 
   console.log(params);             
 	userService.signup(params).then(user => {
 		const token = tokenizer.getToken(user);
-		
-		res.json({
-      success: true,
-      token: token
-		});
+    response.header.code = responseCodes.ok;
+    response.body.success = true;
+    response.body.token = token;
+		res.json(response);
 	}).catch(err => {
-		res.json({
-			success: false,
-			message: err
-		});
+    response.header.code = err;
+    response.body.success = false;
+		res.json(response);
 	});
 });
 
@@ -42,15 +43,14 @@ router.get('/login', (req, res, next) => {
 	userService.loginUser(params)
 		.then(user => {
 			const token = tokenizer.getToken(user);
-			res.json({
-        success: true,
-        token: token
-			});
+			response.header.code = responseCodes.ok;
+      response.body.success = true;
+      response.body.token = token;
+      res.json(response);
 		}).catch(err => {
-			res.json({
-				success: false,
-				message: err
-			});
+			response.header.code = err;
+      response.body.success = false;
+      res.json(response);
 		});
 });
 

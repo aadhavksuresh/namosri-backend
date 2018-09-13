@@ -1,5 +1,5 @@
 var status =  { 
-    head: {},
+    header: {},
     body: {}
 }
 module.exports = status;
