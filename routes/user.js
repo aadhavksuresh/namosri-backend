@@ -10,15 +10,20 @@ router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
-// change to post function
+router.get('/login', function(req, res, next) {
+  res.render('index');
+});
+router.get('/signup', function(req, res, next) {
+  res.render('index', { title: 'Signup' });
+});
+
 router.post('/signup', function(req, res, next) {
   // const params = req.body;
   // remove after debugging
   const params = {
-    username: "narendra",
+    username: "narendra1",
     password: "kumawat"
   }
- 
   console.log(params);             
 	userService.signup(params).then(user => {
 		const token = tokenizer.getToken(user);
@@ -34,7 +39,7 @@ router.post('/signup', function(req, res, next) {
 });
 
 // change to post function
-router.get('/login', (req, res, next) => {
+router.post('/login', (req, res, next) => {
   // const params = req.body;
   const params = {
     username: "narendra",
