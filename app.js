@@ -5,11 +5,10 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-const env = process.env.NODE_ENV || 'development';
-const config = require('./config/config.json')[env];
 
 var index = require('./routes/index');
-var users = require('./routes/users');
+var user = require('./routes/user');
+// var admin = require('./routes/admin');
 
 var app = express();
 
@@ -31,7 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // define all routes here
 app.use('/', index);
-app.use('/users', users);
+app.use('/user', user);
 
 
 // catch 404 and forward to error handler
