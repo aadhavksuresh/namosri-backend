@@ -8,12 +8,8 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var user = require('./routes/user');
-<<<<<<< HEAD
 var products = require('./routes/products');
-// var admin = require('./routes/admin');
-=======
 var add = require('./routes/add');
->>>>>>> master
 
 var app = express();
 
@@ -37,11 +33,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 // define all routes here
 app.use('/', index);
 app.use('/user', user);
-<<<<<<< HEAD
 app.use('/products', products);
-=======
 app.use('/add', add);
->>>>>>> master
 
 
 // catch 404 and forward to error handler
