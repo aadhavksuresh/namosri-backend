@@ -19,6 +19,24 @@ module.exports = {
 			    reject(err);
 			});
 		});
+	},
+	recipieExists: function(param) {
+		return new Promise((resolve , reject) => {
+			let condition = {
+				name : param
+			};
+			models.recipie.findOne({
+				where: condition
+			}).then((recipie) => {
+				if(recipie) {
+					resolve(true);
+				}else {
+					resolve(false);
+				}
+			}).catch((err) => {
+				reject(err);
+			})
+		});
 	}
 
 };

@@ -9,7 +9,8 @@
     invalidRequest: 422,
     userAlreadyExists: 800,
     passwordMismatch: 801,
-    noUserExists: 802
+    noUserExists: 802,
+    alreadyExists: 900
  }
 
 module.exports = responseCodes;

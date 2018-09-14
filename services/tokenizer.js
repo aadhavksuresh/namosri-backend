@@ -2,12 +2,12 @@
 const jwt = require('jsonwebtoken'); // used to create, sign, and verify tokens
 const env = process.env.NODE_ENV || 'development';
 const config = require('../config/config.json')[env];
+const responseCode = require('../models/responseCodes');
 
 module.exports = {
 
     getToken: function(user) {
-        const expiresIn = 3 * 24 * 60 * 60 // expires in 3 days
-        // create a token
+        const expiresIn = 2 * 60 * 60 // 2 hrs
         const token = jwt.sign({
             username: user.username,
             id: user.id,
@@ -17,7 +17,19 @@ module.exports = {
         });
         return token;
     },
-
+    varifyUser: function(token) {
+        return new Promise((resolve , reject)=> {
+            jwt.verify(token, config.superSecret
+            , function(err, decoded) {
+                if(err){
+                    reject(responseCode.unAuthorized);
+                }else{
+                    resolve ({ status: true, data : decoded  });
+                }
+            });
+        })
+        
+    },
     isInt: function(value) {
         return !isNaN(value) 
                 && (parseInt(Number(value)) == value) 

@@ -4,6 +4,7 @@ var userService = require('../services/user');
 var tokenizer = require('../services/tokenizer');
 var response = require('../models/response');
 var responseCodes = require('../models/responseCodes');
+var productService = require('../services/product');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -28,6 +29,7 @@ router.post('/signup', function(req, res, next) {
 	userService.signup(params).then(user => {
 		const token = tokenizer.getToken(user);
     response.header.code = responseCodes.ok;
+    response.body = {};
     response.body.success = true;
     response.body.token = token;
 		res.json(response);
@@ -48,7 +50,8 @@ router.post('/login', (req, res, next) => {
 	userService.loginUser(params)
 		.then(user => {
 			const token = tokenizer.getToken(user);
-			response.header.code = responseCodes.ok;
+      response.header.code = responseCodes.ok;
+      response.body = {};
       response.body.success = true;
       response.body.token = token;
       res.json(response);
