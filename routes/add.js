@@ -5,6 +5,7 @@ var response = require('../models/response');
 var responseCodes = require('../models/responseCodes');
 var recipieService = require('../services/recipie');
 var productServices = require('../services/products');
+var instructionService = require('../services/instructions');
 
 /* GET add listing. */
 router.get('/', function(req, res, next) {
@@ -24,7 +25,8 @@ router.post('/recipie', function(req, res, next) {
     description: "kumawat",
     picture_url: " nknknknnkknk",
     u_id:""
-  }
+  };
+
   tokenizer.varifyUser(token).then((data) => {
     if(data.status) {
         param.u_id = data.data.id;
@@ -40,7 +42,7 @@ router.post('/recipie', function(req, res, next) {
             response.body.success = false;
 		    res.json(response);
         })
-    }else {
+    } else {
         response.header.code = responseCodes.unAuthorized;
         response.body = {};
         response.body.success = false;
@@ -77,5 +79,31 @@ router.post('/products', (req, res) => {
         response.body.success = false;
         res.json(response);
     });
-})
+});
+
+router.post('/instructions', (req, res) => {
+    let params = req.body;
+    tokenizer.varifyUser(params.token).then(user => {
+        params.data.userId = user.data.id;
+        console.log(params.data);
+        instructionService.addInstruction(params.data).then(instruction => {
+            response.header.code = responseCodes.ok;
+            response.body = {};
+            response.body.success = true;
+            response.body.result = instruction;
+            res.json(response);
+        }).catch(err => {
+            response.header.code = err;
+            response.body = {};
+            response.body.success = false;
+            res.json(response);
+        })
+    }).catch(err => {
+        response.header.code = err;
+        response.body = {};
+        response.body.success = false;
+        res.json(response);
+    });
+});
+
 module.exports = router;

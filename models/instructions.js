@@ -7,8 +7,7 @@ let Instruction = connection.sequelize.define('instructions', {
     id: {
         type: connection.Sequelize.INTEGER,
         autoIncrement: true,
-        primaryKey: true,
-        allowNull: false
+        primaryKey: true
     },
     description: {
         type: connection.Sequelize.STRING,

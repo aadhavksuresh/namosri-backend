@@ -12,6 +12,7 @@
     noUserExists: 802,
     productAlreadyExists: 803,
     noProductExists: 804,
+    noInstructionExists: 805,
     alreadyExists: 900,
  }
 
