@@ -18,7 +18,7 @@ router.get('/recipie', function(req, res, next) {
 router.post('/recipie', function(req, res, next) {
   // const params = req.body;
   // remove after debugging
-  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5hcmV1uZHJhIiwiaWQiOjEsImlhdCI6MTUzNjkxMDAyNywiZXhwIjoxNTM3MTY5MjI3fQ.GaLwAjoQdapy5RuuW02nG-v_KEuegBB9MRohhlquAQY";
+  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5hcmVuZHJhMSIsImlkIjoxLCJpYXQiOjE1MzY5MzcwOTcsImV4cCI6MTUzNjk0NDI5N30.RSHCkBCR-imI5c39QoXIdHGUnAjYYiOEFLAmVGForgw";
   let param = {
     name: "narendra1111",
     description: "kumawat",
@@ -57,7 +57,7 @@ router.post('/recipie', function(req, res, next) {
 router.post('/products', (req, res) => {
   let params = req.body;
     //just for checking
-    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5hcmVuZHJhMSIsImlkIjoxLCJpYXQiOjE1MzY5MjUyODUsImV4cCI6MTUzNjkzMjQ4NX0.AwpRNDw2UJcqRgloADPCGl09ejA5lUDUk_-PrZtjEPM";
+    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5hcmVuZHJhMSIsImlkIjoxLCJpYXQiOjE1MzY5MzcwOTcsImV4cCI6MTUzNjk0NDI5N30.RSHCkBCR-imI5c39QoXIdHGUnAjYYiOEFLAmVGForgw";
 
     tokenizer.varifyUser(params.token).then(user => {
         params.data.userId = user.data.id;

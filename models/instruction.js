@@ -10,13 +10,17 @@ let Instruction = connection.sequelize.define('instructions', {
         primaryKey: true,
         allowNull: false
     },
+    userId: {
+        type: connection.Sequelize.INTEGER,
+        allowNull: false
+    },
     description: {
         type: connection.Sequelize.STRING,
         allowNull: false
     }
 });
 
-Instruction.belongsTo(User);
+Products.belongsTo(User);
 Instruction.belongsTo(Products, {foreignKey: 'productId', targetKey: 'productId'});
 Instruction.sync({force: false});
 

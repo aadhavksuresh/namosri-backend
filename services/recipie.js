@@ -1,10 +1,8 @@
 const validation = require('./validation');
 const models = require('../models/models');
-const bcrypt = require('bcrypt');
 const responseCodes = require('../models/responseCodes');
 
 module.exports = {
-//  ============= used by admin only for providing access to another user===============
     addRecipie: function(params) {
         return new Promise((resolve, reject) => {
             if (!params.name || !params.description || !params.picture_url) {
