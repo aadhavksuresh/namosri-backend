@@ -1,6 +1,7 @@
 'use strict';
 var connection = require('./connection');
 var User = require('./user');
+
 var Recipie = connection.sequelize.define('recipie', {
 	id: { 
 		type: connection.Sequelize.INTEGER,

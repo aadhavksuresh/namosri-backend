@@ -1,10 +1,10 @@
 var express = require('express');
 var router = express.Router();
-var userService = require('../services/user');
 var tokenizer = require('../services/tokenizer');
 var response = require('../models/response');
 var responseCodes = require('../models/responseCodes');
 var recipieService = require('../services/recipie');
+var productServices = require('../services/products');
 
 /* GET add listing. */
 router.get('/', function(req, res, next) {
@@ -53,4 +53,29 @@ router.post('/recipie', function(req, res, next) {
     res.json(response);
   });
 });
+
+router.post('/products', (req, res) => {
+  let params = req.body;
+    //just for checking
+    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5hcmVuZHJhMSIsImlkIjoxLCJpYXQiOjE1MzY5MjUyODUsImV4cCI6MTUzNjkzMjQ4NX0.AwpRNDw2UJcqRgloADPCGl09ejA5lUDUk_-PrZtjEPM";
+
+    tokenizer.varifyUser(params.token).then(user => {
+        params.data.userId = user.data.id;
+        productServices.addProduct(params.data).then(product => {
+            response.header.code = responseCodes.ok;
+            response.body.success = true;
+            response.body.result = product
+            res.json(response);
+        }).catch(err => {
+            response.header.code = err;
+            response.body.success = false;
+            res.json(response);
+        });
+    }).catch(err => {
+        response.header.code = err;
+        response.body = {};
+        response.body.success = false;
+        res.json(response);
+    });
+})
 module.exports = router;

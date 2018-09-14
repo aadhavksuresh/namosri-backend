@@ -4,7 +4,6 @@ var userService = require('../services/user');
 var tokenizer = require('../services/tokenizer');
 var response = require('../models/response');
 var responseCodes = require('../models/responseCodes');
-var productService = require('../services/product');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -44,7 +43,7 @@ router.post('/signup', function(req, res, next) {
 router.post('/login', (req, res, next) => {
   // const params = req.body;
   const params = {
-    username: "narendra",
+    username: "narendra1",
     password: "kumawat"
   }
 	userService.loginUser(params)

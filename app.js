@@ -8,8 +8,9 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var user = require('./routes/user');
-var products = require('./routes/products');
-var add = require('./routes/add');
+var addRequests = require('./routes/add');
+var deleteRequests = require('./routes/delete');
+var updateRequests = require('./routes/update');
 
 var app = express();
 
@@ -33,8 +34,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 // define all routes here
 app.use('/', index);
 app.use('/user', user);
-app.use('/products', products);
-app.use('/add', add);
+app.use('/add', addRequests);
+app.use('/delete', deleteRequests);
+app.use('/update', updateRequests);
 
 
 // catch 404 and forward to error handler
