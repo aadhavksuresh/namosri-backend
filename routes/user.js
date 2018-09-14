@@ -61,4 +61,22 @@ router.post('/login', (req, res, next) => {
 		});
 });
 
+router.post('/delete', (req, res) => {
+  let params = req.body;
+  userService.deleteUser(params).then(user => {
+    console.log("why");
+    response.header.code = responseCodes.ok;
+    response.body = {};
+    response.body.success = true;
+    response.body.result = user;
+    res.json(response)
+  }).catch(err => {
+    console.log("shy");
+    response.header.code = err;
+    response.body = {};
+    response.body.success = false;
+    res.json(response);
+  });
+});
+
 module.exports = router;

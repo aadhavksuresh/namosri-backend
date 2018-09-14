@@ -74,6 +74,6 @@ module.exports = {
                     reject(responseCodes.internalError);
                 });
             }
-        })
+        });
     }
 };

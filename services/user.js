@@ -126,5 +126,32 @@ module.exports = {
                 });
             }
         });
+    },
+    deleteUser: function(params){
+        return new Promise((resolve, reject) => {
+            if(!params.id){
+                reject(responseCodes.invalidRequest);
+            } else {
+                models.user.findOne({
+                    where: {
+                        id: params.id
+                    }
+                }).then(user => {
+                    if(!user){
+                        reject(responseCodes.noUserExists);
+                    } else {
+                        user.updateAttributes({
+                            deactivated: true
+                        }).then(usr => {
+                            resolve(usr.dataValues);
+                        }).catch(err => {
+                            reject(responseCodes.internalError);
+                        });
+                    }
+                }).catch(err => {
+                    reject(responseCodes.internalError);
+                });
+            }
+        });
     }
 };
