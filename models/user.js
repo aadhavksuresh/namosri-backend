@@ -9,7 +9,8 @@ var User = connection.sequelize.define('user', {
 	},
 	username: {
 		type: connection.Sequelize.STRING,
-		allowNull: true
+		allowNull: false,
+		unique: true
 	},
 	password: {
 		type: connection.Sequelize.STRING,
