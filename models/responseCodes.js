@@ -11,7 +11,8 @@
     passwordMismatch: 801,
     noUserExists: 802,
     productAlreadyExists: 803,
-    noProductExists: 804
+    noProductExists: 804,
+    alreadyExists: 900,
  }
 
 module.exports = responseCodes;

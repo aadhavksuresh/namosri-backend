@@ -4,8 +4,9 @@ var products = require('./products');
 
 var models = {
     user : user,
+    response : response,
     products: products,
-    response : response
+    recipie: recipie
 };
 
 module.exports = models;
