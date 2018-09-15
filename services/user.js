@@ -50,7 +50,6 @@ module.exports = {
                                     bcrypt.compare(params.password, user.dataValues.password)
                                         .then(function(res) {
                                             if (res == true) {
-                                                console.log(user.dataValues);
                                                 resolve(user.dataValues);
                                             } else {
                                                 reject(responseCodes.passwordMismatch);

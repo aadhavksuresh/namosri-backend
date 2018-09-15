@@ -14,11 +14,8 @@ var updateRequests = require('./routes/update');
 
 var app = express();
 
-// view engine setup
-// No need till Now..
-app.set('views', path.join(__dirname, 'views'));
-app.engine('html', require('ejs').renderFile);
-app.set('view engine', 'html');
+app.use(express.static(path.join(__dirname+'/public')));
+app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
 app.use(bodyParser.json({
@@ -29,7 +26,6 @@ app.use(bodyParser.urlencoded({
   extended: true
 }))
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
 
 // define all routes here
 app.use('/', index);

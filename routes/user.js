@@ -6,18 +6,26 @@ var response = require('../models/response');
 var responseCodes = require('../models/responseCodes');
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+router.post('/', function(req, res) {
+  tokenizer.varifyUser(req.body.token).then(user => {
+    res.render('adminIndex');
+  }).catch(err => {
+    res.redirect('/user/login?invalid=true');
+  })
 });
 
-router.get('/login', function(req, res, next) {
-  res.render('login');
+router.get('/login', function(req, res) {
+  var invalid = false;
+  if(req.query.invalid){
+    invalid = true
+  }
+  res.render('login', {invalid: invalid});
 });
-router.get('/signup', function(req, res, next) {
+router.get('/signup', function(req, res) {
   res.render('index', { title: 'Signup' });
 });
 
-router.post('/signup', function(req, res, next) {
+router.post('/signup', function(req, res) {
   // const params = req.body;
   // remove after debugging
   const params = {
@@ -40,15 +48,23 @@ router.post('/signup', function(req, res, next) {
 });
 
 // change to post function
-router.post('/login', (req, res, next) => {
+router.post('/login', (req, res) => {
+
+  var reqHeader = Buffer.from(req.get('Authorization').split(' ')[1], 'base64').toString('ascii');
   // const params = req.body;
+  // const params = {
+  //   username: "narendra1",
+  //   password: "kumawat"
+  // }
+
   const params = {
-    username: "narendra1",
-    password: "kumawat"
+    username: reqHeader.split(':')[0],
+    password: reqHeader.split(':')[1],
   }
 	userService.loginUser(params)
 		.then(user => {
-			const token = tokenizer.getToken(user);
+      const token = tokenizer.getToken(user);
+      console.log("okay");
       response.header.code = responseCodes.ok;
       response.body = {};
       response.body.success = true;
