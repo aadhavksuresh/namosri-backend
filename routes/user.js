@@ -7,32 +7,39 @@ var responseCodes = require('../models/responseCodes');
 
 /* GET users listing. */
 router.post('/', function(req, res) {
+  error=false;
+  if(req.query.error){
+    error = req.query.error;
+  }
   tokenizer.varifyUser(req.body.token).then(user => {
     res.render('adminIndex');
   }).catch(err => {
     res.redirect('/user/login?invalid=true');
-  })
+  });
 });
 
 router.get('/login', function(req, res) {
   var invalid = false;
   if(req.query.invalid){
-    invalid = true
+    invalid = req.query.invalid;
   }
   res.render('login', {invalid: invalid});
 });
-router.get('/signup', function(req, res) {
-  res.render('index', { title: 'Signup' });
-});
+
+// router.get('/signup', function(req, res) {
+//   res.render('index', { title: 'Signup' });
+// });
 
 router.post('/signup', function(req, res) {
   // const params = req.body;
   // remove after debugging
+  reqHeader = tokenizer.getUserInfoFromHeader(req);
+
   const params = {
-    username: "narendra1",
-    password: "kumawat"
-  }
-  console.log(params);             
+    username: reqHeader.username,
+    password: reqHeader.password
+  };
+              
 	userService.signup(params).then(user => {
 		const token = tokenizer.getToken(user);
     response.header.code = responseCodes.ok;
@@ -50,21 +57,16 @@ router.post('/signup', function(req, res) {
 // change to post function
 router.post('/login', (req, res) => {
 
-  var reqHeader = Buffer.from(req.get('Authorization').split(' ')[1], 'base64').toString('ascii');
-  // const params = req.body;
-  // const params = {
-  //   username: "narendra1",
-  //   password: "kumawat"
-  // }
+  let params = {};
 
-  const params = {
-    username: reqHeader.split(':')[0],
-    password: reqHeader.split(':')[1],
-  }
+  reqHeader = tokenizer.getUserInfoFromHeader(req);
+
+  params.username = reqHeader.username;
+  params.password = reqHeader.password;
+
 	userService.loginUser(params)
 		.then(user => {
       const token = tokenizer.getToken(user);
-      console.log("okay");
       response.header.code = responseCodes.ok;
       response.body = {};
       response.body.success = true;
@@ -75,6 +77,14 @@ router.post('/login', (req, res) => {
       response.body.success = false;
       res.json(response);
 		});
+});
+
+router.post('/addUser', (req, res) => {
+  tokenizer.varifyUser(req.body.token).then(user => {
+    res.render('addUser');
+  }).catch(err => {
+    res.redirect('/user?error=true');
+  });
 });
 
 router.post('/delete', (req, res) => {

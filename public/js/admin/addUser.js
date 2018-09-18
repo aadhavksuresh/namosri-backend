@@ -1,19 +1,21 @@
 $(document).ready(function(){
-    $('#loginForm').submit(function(e){
+    $('#addUserForm').submit(function(){
         const USERNAME = $('#username').val();
         const PASSWORD = $('#password').val();
 
         e.preventDefault();
         $.ajax({
-            url: '/user/login',
+            url: '/user/signup',
             headers: {
                 "Authorization": "Basic " + btoa(USERNAME + ":" + PASSWORD)
+            },
+            data: {
+                token: window.sessionStorage.getItem('authToken');
             },
             type: 'POST',
             success: function(response){
                 if(response.body.success){
-                    window.sessionStorage.setItem('authToken', response.body.token);
-                    post('/user', {token: window.sessionStorage.getItem('authToken')});
+
                 } else {
                     console.log("request unsuccessfull");
                 }

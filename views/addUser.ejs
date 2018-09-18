@@ -12,17 +12,18 @@
     </head>
 
     <body>
-        <h1><%= invalid %></h1>
-        <form id="loginForm">
+        <h1>Signup</h1>
+        <h5><%= error %></h5>
+        <form id="addUserForm">
           <input type="text" id="username" name="username" placeholder="Enter Your Username" required/>
           <input type="password" id="password" name="password" placeholder="Enter Your Password" required/>
-          <input type="submit" value="LOGIN"/>
+          <input type="submit" value="SIGNUP"/>
         </form>
 
       <!--JavaScript at end of body for optimized loading-->
       <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
       <script type="text/javascript" src="/js/materialize.min.js"></script>
-      <script src="/js/login.js"></script>
+      <script src="/js/addUser.js"></script>
       <script src="/js/post.js"></script>
     </body>
   </html>

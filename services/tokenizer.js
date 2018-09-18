@@ -34,6 +34,12 @@ module.exports = {
         return !isNaN(value) 
                 && (parseInt(Number(value)) == value) 
                 && (!isNaN(parseInt(value, 10)));
+    },
+    getUserInfoFromHeader: function(req){
+        reqHeader = Buffer.from(req.get('Authorization').split(' ')[1], 'base64').toString('ascii');
+        return {
+            username: reqHeader.split(':')[0],
+            password: reqHeader.split(':')[1]
+        }
     }
-
 };
