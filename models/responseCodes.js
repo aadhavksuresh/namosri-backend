@@ -13,6 +13,7 @@
     productAlreadyExists: 803,
     noProductExists: 804,
     noInstructionExists: 805,
+    enterDifferentPassword: 806,
     alreadyExists: 900,
  }
 
