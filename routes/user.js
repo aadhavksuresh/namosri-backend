@@ -7,10 +7,20 @@ var responseCodes = require('../models/responseCodes');
 var bcrypt = require("bcrypt");
 
 router.get('/', function(req, res, next) {
-  tokenizer.varifyUser(req.query.content).then(user => {
-    res.render('admin/index');
+  res.render("admin/index");
+});
+
+router.post('/verifier', (req, res) => {
+  tokenizer.varifyUser(req.body.token).then(user => {
+    response.header.code = responseCodes.ok;
+    response.body = {};
+    response.body.success = true;
+    res.json(response);
   }).catch(err => {
-    res.redirect('/user/login?invalid=true');
+    response.header.code = responseCodes.unAuthorized;
+    response.body = {};
+    response.body.success = false;
+    res.json(response);
   });
 });
 

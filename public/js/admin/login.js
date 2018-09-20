@@ -13,7 +13,7 @@ $(document).ready(function(){
             success: function(result){
                 if(result.body.success){
                     window.sessionStorage.setItem("authToken", result.body.token);
-                    window.location.href = '/user?content='+result.body.token;
+                    window.location.href = '/user';
                 } else {
                     window.location.href = '/user/login?invalid=true'
                 }
