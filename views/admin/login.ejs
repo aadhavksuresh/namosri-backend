@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="/css/libs/materialize.min.css"  media="screen,projection"/>
+
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <title>Login page</title>
+      
+    </head>
+
+    <body>
+        
+        <div class="main">
+            <h3><%= invalid %></h3>
+            <form id="loginForm">
+                <input type="text" id="username" />
+                <input type="password" id="password" />
+                <input type="submit" value="Login"/>
+            </form>
+        </div>
+
+      <!--JavaScript at end of body for optimized loading-->
+      <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+      <script type="text/javascript" src="/js/libs/materialize.min.js"></script>
+      <script src="/js/admin/login.js"></script>
+    </body>
+  </html>

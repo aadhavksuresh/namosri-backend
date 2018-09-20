@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="/css/libs/materialize.min.css"  media="screen,projection"/>
+
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <title>Admin main page</title>
+      <%- include partials/loadercss %>
+    </head>
+
+    <body>
+      
+        <%- include partials/loader %>
+
+        <div class="main">
+          <button>Manipulate User</button>
+          <button data-url="/user/signup">AddUser</button>
+          <button data-url="/user/delete">DeleteUser</button>
+          <button data-url="/user/changeInfo">Change Your Info</button>
+        </div>
+
+        <%- include partials/errors %>
+
+      <!--JavaScript at end of body for optimized loading-->
+      <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+      <script type="text/javascript" src="/js/libs/materialize.min.js"></script>
+      <script src="/js/admin/index.js"></script>
+    </body>
+  </html>

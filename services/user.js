@@ -18,15 +18,16 @@ module.exports = {
                             bcrypt.hash(params.password, 2).then((hash) => {
                                 params.password = hash;
                                 models.user.create(params).then(user => {
+                                    console.log(user.dataValues);
                                     resolve(user.dataValues);
-                                }).catch((err) => {                                    
+                                }).catch((err) => {                                  
                                     reject(responseCodes.internalError);
                                 });
-                            }).catch((err) => {                                
+                            }).catch((err) => {                              
                                 reject(responseCodes.internalError);
                             });             
                         }
-                    }).catch(err => {                        
+                    }).catch(err => {                    
                         reject(responseCodes.internalError);
                     });
             }
@@ -43,14 +44,14 @@ module.exports = {
                         if (result) {
                             models.user.findOne({
                                 where: {
-                                    username: params.username
+                                    username: params.username,
+                                    deactivated: 0
                                 }
                             }).then(user => {
                                 if (user) {
                                     bcrypt.compare(params.password, user.dataValues.password)
                                         .then(function(res) {
                                             if (res == true) {
-                                                console.log(user.dataValues);
                                                 resolve(user.dataValues);
                                             } else {
                                                 reject(responseCodes.passwordMismatch);
@@ -66,7 +67,7 @@ module.exports = {
                             reject(responseCodes.internalError);
                         }
                     }).catch(err => {                        
-                        reject(responseCodes.internalError);
+                        reject(responseCodes.userAlreadyExists);
                     });
             }
         });
@@ -100,24 +101,55 @@ module.exports = {
             }
         });
     },
+    //gives all users except user no 1
+    getAllUser: function(params){
+        return new Promise((resolve, reject) => {
+            if(!params.username){
+                reject(responseCodes.invalidRequest);
+            } else {
+                models.user.findAll({
+                    where: {
+                        id: {
+                            [models.Op.ne]: 1
+                        },
+                        deactivated: 0
+                    }
+                }).then(users => {
+                    resolve(users);
+                }).catch(err => {
+                    reject(responseCodes.internalError);
+                })
+            }
+        });
+    },
 //  ================= update user values =================
     updateUser: function(params) {
         return new Promise((resolve, reject) => {
-            if (!params.username) {
+            if (!params.oldUsername) {
                 reject(responseCodes.invalidRequest);
             } else {
                 models.user.findOne({
                     where: {
-                        username: params.username
+                        username: params.oldUsername
                     }
                 }).then(user => {
                     if (user) {
-                        user.updateAttributes(params)
-                            .then(user => {
+                        
+                        bcrypt.hash(params.newPassword, 2).then((hash) => {
+                            params.newPassword = hash;
+                            user.updateAttributes({
+                                username: params.newUsername,
+                                password: params.newPassword
+                            }).then(user => {
                                 resolve(user.dataValues);
                             }).catch(err => {
                                 reject(responseCodes.internalError);
                             });
+                        }).catch((err) => {                              
+                            reject(responseCodes.internalError);
+                        });   
+
+                        
                     } else {
                         reject(responseCodes.noUserExists);
                     }
@@ -129,12 +161,15 @@ module.exports = {
     },
     deleteUser: function(params){
         return new Promise((resolve, reject) => {
-            if(!params.id){
+            if(!params.username){
                 reject(responseCodes.invalidRequest);
             } else {
                 models.user.findOne({
                     where: {
-                        id: params.id
+                        username: params.username,
+                        id: {
+                            [models.Op.ne]: 1
+                        }
                     }
                 }).then(user => {
                     if(!user){
