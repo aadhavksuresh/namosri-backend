@@ -13,7 +13,7 @@ $(document).ready(function(){
                     $('.errors').css("display", "none");
 
                     $('button').click(function(e){
-                        window.location.href += $(e.target).attr('data-url');
+                        window.location.href = $(e.target).attr('data-url');
                     });
                 } else {
                     $('.loader').css("display", "none");

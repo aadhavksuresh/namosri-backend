@@ -5,19 +5,24 @@ let response = require('../models/response');
 let responseCodes = require('../models/responseCodes');
 let tokenizer = require("../services/tokenizer");
 
+router.get('/products', (req, res) => {
+    res.render('product/delete');
+});
+
 router.post('/products', (req, res) => {
     let params = req.body;
     tokenizer.varifyUser(params.token).then(user => {
-        params.data.userId = user.data.id;
-        productServices.deleteProduct(params.data).then(product => {
+        params.userId = user.data.id;
+        productServices.deleteProduct(params).then(product => {
             response.header.code = responseCodes.ok;
+            response.body = {};
             response.body.success = true;
-            response.body.result = product;
+            response.body.result = product.name;
             res.json(response);
         }).catch(err => {
             response.header.code = err;
+            response.body = {};
             response.body.success = false;
-            response.body.result = null;
             res.json(response);
         });
     }).catch(err => {

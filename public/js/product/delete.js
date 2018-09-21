@@ -1,8 +1,4 @@
 $(document).ready(function(){
-    
-});
-
-$(document).ready(function(){
     if(window.sessionStorage.getItem("authToken")){
         $.ajax({
             url: '/user/verifier',
@@ -16,19 +12,19 @@ $(document).ready(function(){
                     $('.main').css("display", "block");
                     $('.errors').css("display", "none");
 
-                    function getUsers(){
+                    function getProducts(){
                         $.ajax({
-                            url: "/user/getAll",
+                            url: "/user/getAllProducts",
                             method: "POST",
                             data: {
                                 token: window.sessionStorage.getItem("authToken")
                             },
                             success: function(result){
                                 if(result.body.success){
-                                    if($("#userName").length == 0){
+                                    if($("#productName").length == 0){
                                         var selectTag = $("<select></select>");
-                                        selectTag.attr("id", "userName");
-                                        var options = $('<option value="0">Choose Which User to Delete</option>');
+                                        selectTag.attr("id", "productName");
+                                        var options = $('<option value="0">Choose Which Product to Delete</option>');
                                         selectTag.append(options);
                                         for(var i=0;i<result.body.result.length;i++){
                                             var options = $("<option></option>");
@@ -36,15 +32,16 @@ $(document).ready(function(){
                                             options.text(result.body.result[i]);
                                             $(selectTag).append(options);
                                         }
-                                        $("#userDelete").append(selectTag);
-                                        $("#userDelete").append($('<input type="submit" value="Delete User">'));
-                                        $("#userDelete").css("display", "block");
-                                        $("#userName").formSelect();
+                                        $("#productDelete").append(selectTag);
+                                        $("#productDelete").append($('<input type="submit" value="Delete Product">'));
+                                        $("#productDelete").css("display", "block");
+                                        $("#productName").formSelect();
                                     } else {
-                                        $("#userDelete").empty();
+                                        $("#productDelete").empty();
                                         getUsers();
                                     }
                                 } else {
+                                    console.log(result);
                                     console.log("incorrect");
                                 }
                             },
@@ -54,35 +51,32 @@ $(document).ready(function(){
                         });
                     }
                 
-                    getUsers();
-                
-                    $("#userDelete").submit(function(e){
+                    getProducts();
+
+                    $("#productDelete").submit(function(e){
                         e.preventDefault();
-                        var value = $("#userName").val();
-                        if(value == 0 || !value){
-                            console.log("Enter Valid Option");
-                        } else {
-                            $.ajax({
-                                url: "/user/delete",
-                                method: "POST",
-                                data: {
-                                    username: value,
-                                    token: window.sessionStorage.getItem("authToken")
-                                },
-                                success: function(result){
-                                    if(result.body.success){
-                                        getUsers();
-                                    } else {   
-                                        $("#userDelete").css("display", "none");
-                                        console.log("wow");
-                                    }
-                                },
-                                error: function(err){
-                                    console.log("can't make ajax request");
+                        var value = $("#productName").val();
+                        console.log(value);
+                        $.ajax({
+                            url: "/delete/products",
+                            method: "POST",
+                            data: {
+                                token: window.sessionStorage.getItem("authToken"),
+                                name: value
+                            },
+                            success: function(result){
+                                if(result.body.success){
+                                    console.log(result);
+                                } else {
+                                    console.log(result);
                                 }
-                            });
-                        }
-                    })
+                            },
+                            error: function(err){
+                                console.log("Can't make the ajax request");
+                            }
+                        })
+                    });
+
                 } else {
                     $('.loader').css("display", "none");
                     $('.main').css("display", "none");

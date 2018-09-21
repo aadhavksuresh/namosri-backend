@@ -1,10 +1,33 @@
 var express = require('express');
 var router = express.Router();
 var userService = require('../services/user');
+var productService = require('../services/products');
 var tokenizer = require('../services/tokenizer');
 var response = require('../models/response');
 var responseCodes = require('../models/responseCodes');
 var bcrypt = require("bcrypt");
+
+//remove after creating first user
+var models = require("../models/models");
+var bcrypt = require("bcrypt");
+
+//remove after creating first user
+router.get('/first', (req, res) => {
+  bcrypt.hash('admin', 2).then(hash => {
+    models.user.create({
+      id: 1,
+      username: admin,
+      password: hash,
+      deactivated: 0
+    }).then(user => {
+      res.send("user with password admin and username admin created");
+    }).catch(err => {
+      res.send("some errors occured");
+    });
+  }).catch(err => {
+    res.send("some errors occured");
+  });
+});
 
 router.get('/', function(req, res, next) {
   res.render("admin/index");
@@ -149,7 +172,6 @@ router.post('/getAll', (req, res) => {
         }
         res.json(response);
       }).catch(err => {
-        console.log("why");
         console.log(err);
         response.header.code = err;
         response.body = {};
@@ -164,8 +186,34 @@ router.post('/getAll', (req, res) => {
       res.json(response);
     }
   }).catch(err => {
-    console.log(2);
     response.header.code = err;
+    response.body = {};
+    response.body.success = false;
+    res.json(response);
+  });
+});
+
+router.post('/getAllProducts', (req, res) => {
+  tokenizer.varifyUser(req.body.token).then(user => {
+    if(user.data.id == 1){
+      productService.getAllProducts(req.body).then(products => {
+        response.header.code = responseCodes.ok;
+        response.body = {};
+        response.body.success = true;
+        response.body.result = [];
+        for(var i = 0; i<products.length; i++){
+          response.body.result.push(products[i].dataValues.name);
+        }
+        res.json(response);
+      }).catch(err => {
+        response.header.code = err;
+        response.body = {};
+        response.body.success = false;
+        res.json(response);
+      })
+    }
+  }).catch(err => {
+    response.header.code = responseCodes.unAuthorized;
     response.body = {};
     response.body.success = false;
     res.json(response);

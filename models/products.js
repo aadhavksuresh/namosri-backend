@@ -20,7 +20,8 @@ let Products = connection.sequelize.define('products', {
     },
     productImage: {
         type: connection.Sequelize.STRING,
-        allowNull: true
+        allowNull: true,
+        defaultValue: "default.jpg"
     },
     position: {
         type: connection.Sequelize.INTEGER,

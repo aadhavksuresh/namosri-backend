@@ -12,11 +12,24 @@ module.exports = {
                     if(result){
                         reject(responseCodes.productAlreadyExists);
                     } else {
-                        models.products.create(params).then(product => {
-                            resolve(product.dataValues);
+                        models.products.find({
+                            where: {
+                                position: params.position
+                            }
+                        }).then(product => {
+                            if(!product){
+                                models.products.create(params).then(product => {
+                                    resolve(product.dataValues);
+                                }).catch(err => {
+                                    reject(responseCodes.internalError);
+                                });
+                            } else {
+                                reject(responseCodes.positionExists);
+                            }
                         }).catch(err => {
-                            reject(responseCodes.internalError);
+                            console.log(err);
                         });
+                        
                     }
                 }).catch(err => {
                     reject(responseCodes.invalidRequest);
@@ -74,6 +87,19 @@ module.exports = {
                     reject(responseCodes.internalError);
                 });
             }
+        });
+    },
+    getAllProducts: function(params){
+        return new Promise((resolve, reject) => {
+            models.products.findAll({
+                where: {
+                    visible: 1
+                }
+            }).then(product => {
+                resolve(product)
+            }).catch(err => {
+                reject(responseCodes.internalError);
+            })
         });
     }
 };
