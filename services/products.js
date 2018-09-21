@@ -63,22 +63,24 @@ module.exports = {
             }
         })
     },
-    updateProducts: function(oldValue, newValues){
+    updateProducts: function(params){
         return new Promise((resolve, reject) => {
-            if(!oldValue.name || !newValues){
+            if(!params.oldName || !params.newName){
                 reject(responseCodes.invalidRequest);
             } else {
                 models.products.findOne({
                     where: {
-                        name: oldValue.name
+                        name: params.oldName
                     }
                 }).then(product => {
                     if(!product){
                         reject(responseCodes.noProductExists);
                     }
-                    product.updateAttributes(
-                        newValues
-                    ).then(product => {
+                    product.updateAttributes({
+                        name: params.newName,
+                        description: params.newDescription,
+                        position: params.newPosition
+                    }).then(product => {
                         resolve(product.dataValues);
                     }).catch(err => {
                         reject(responseCodes.internalError);

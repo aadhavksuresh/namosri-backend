@@ -15,18 +15,18 @@ var bcrypt = require("bcrypt");
 router.get('/first', (req, res) => {
   bcrypt.hash('admin', 2).then(hash => {
     models.user.create({
-      id: 1,
-      username: admin,
+      username: 'admin',
       password: hash,
-      deactivated: 0
+      deactivated: 0,
+      id: 1
     }).then(user => {
-      res.send("user with password admin and username admin created");
+      res.send(user.dataValues);
     }).catch(err => {
-      res.send("some errors occured");
-    });
+      res.send("some sql errors occured");
+    })
   }).catch(err => {
-    res.send("some errors occured");
-  });
+    res.send("some bcrypt error occured");
+  })
 });
 
 router.get('/', function(req, res, next) {
