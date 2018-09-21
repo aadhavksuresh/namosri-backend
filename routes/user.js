@@ -25,11 +25,7 @@ router.post('/verifier', (req, res) => {
 });
 
 router.get('/signup', function(req, res, next) {
-  tokenizer.varifyUser(req.query.content).then(user => {
-    res.render("admin/signup");
-  }).catch(err => {
-    res.redirect("/user/login?invalid=true");
-  });
+  res.render("admin/signup");
 });
 
 router.post('/signup', function(req, res) {
@@ -98,18 +94,15 @@ router.post('/login', (req, res) => {
       response.body.token = token;
       res.json(response);
 		}).catch(err => {
-			response.header.code = err;
+      response.header.code = err;
+      response.body = {};
       response.body.success = false;
       res.json(response);
 		});
 });
 
 router.get('/delete', (req, res) => {
-  tokenizer.varifyUser(req.query.content).then(user => {
-    res.render('admin/delete');
-  }).catch(err => {
-    res.redirect("/user/login?invalid=true");
-  });
+  res.render('admin/delete');
 });
 
 router.post('/delete', (req, res) => {
@@ -180,11 +173,7 @@ router.post('/getAll', (req, res) => {
 });
 
 router.get('/changeInfo', (req, res) => {
-  tokenizer.varifyUser(req.query.content).then(user => {
-    res.render('admin/change');
-  }).catch(err => {
-    res.redirect('/user/login?invalid=true');
-  });
+  res.render('admin/change');
 });
 
 router.post('/changeInfo', (req, res) => {
