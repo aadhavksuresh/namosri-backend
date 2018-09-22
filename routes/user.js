@@ -194,56 +194,6 @@ router.post('/getAll', (req, res) => {
   });
 });
 
-router.post('/getAllProducts', (req, res) => {
-  tokenizer.varifyUser(req.body.token).then(user => {
-    productService.getAllProducts(req.body).then(products => {
-      response.header.code = responseCodes.ok;
-      response.body = {};
-      response.body.success = true;
-      response.body.result = [];
-      for(var i = 0; i<products.length; i++){
-        response.body.result.push(products[i].dataValues.name);
-      }
-      res.json(response);
-    }).catch(err => {
-      response.header.code = err;
-      response.body = {};
-      response.body.success = false;
-      res.json(response);
-    });
-  }).catch(err => {
-    response.header.code = responseCodes.unAuthorized;
-    response.body = {};
-    response.body.success = false;
-    res.json(response);
-  });
-});
-
-router.post('/getAllRecipes', (req, res) => {
-  tokenizer.varifyUser(req.body.token).then(user => {
-    recipeService.getAllRecipe(req.body).then(recipes => {
-      response.header.code = responseCodes.ok;
-      response.body = {};
-      response.body.success = true;
-      response.body.result = [];
-      for(var i = 0; i<recipes.length; i++){
-        response.body.result.push(recipes[i].dataValues.name);
-      }
-      res.json(response);
-    }).catch(err => {
-      response.header.code = err;
-      response.body = {};
-      response.body.success = false;
-      res.json(response);
-    });
-  }).catch(err => {
-    response.header.code = responseCodes.unAuthorized;
-    response.body = {};
-    response.body.success = false;
-    res.json(response);
-  });
-})
-
 router.get('/changeInfo', (req, res) => {
   res.render('admin/change');
 });

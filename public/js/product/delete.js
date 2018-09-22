@@ -11,10 +11,9 @@ $(document).ready(function(){
                     $('.loader').css("display", "none");
                     $('.main').css("display", "block");
                     $('.errors').css("display", "none");
-
                     function getProducts(){
                         $.ajax({
-                            url: "/user/getAllProducts",
+                            url: "/get/all/products",
                             method: "POST",
                             data: {
                                 token: window.sessionStorage.getItem("authToken")

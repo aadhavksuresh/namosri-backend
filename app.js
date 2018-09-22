@@ -11,6 +11,7 @@ var user = require('./routes/user');
 var addRequests = require('./routes/add');
 var deleteRequests = require('./routes/delete');
 var updateRequests = require('./routes/update');
+var getRequest = require('./routes/get')
 
 var app = express();
 
@@ -34,11 +35,12 @@ app.use('/user', user);
 app.use('/add', addRequests);
 app.use('/delete', deleteRequests);
 app.use('/update', updateRequests);
+app.use('/get' , getRequest);
 
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
+  var err = new Error('Not Found' + err);
   err.status = 404;
   next(err);
 });
