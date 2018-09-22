@@ -12,5 +12,15 @@ router.get('/aboutus', function(req, res, next) {
 router.get('/contact', function(req, res, next) {
   res.render('delispices/contact', { active: 'contact' });
 });
+router.get('/privacy', function(req, res, next) {
+  res.render('delispices/privacy', { active: '' });
+});
+router.get('/statutory', function(req, res, next) {
+  res.render('delispices/statutory', { active: '' });
+});
+router.get('/terms', function(req, res, next) {
+  res.render('delispices/terms', { active: '' });
+});
+
 
 module.exports = router;
