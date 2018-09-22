@@ -27,8 +27,8 @@ $(document).ready(function(){
                                         selectTag.append(options);
                                         for(var i=0;i<result.body.result.length;i++){
                                             var options = $("<option></option>");
-                                            options.attr("value", result.body.result[i]);
-                                            options.text(result.body.result[i]);
+                                            options.attr("value", result.body.result[i].name);
+                                            options.text(result.body.result[i].name);
                                             $(selectTag).append(options);
                                         }
                                         $("#productDelete").append(selectTag);

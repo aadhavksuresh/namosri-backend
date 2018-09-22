@@ -14,7 +14,7 @@ $(document).ready(function(){
 
                     function getRecipes(){
                         $.ajax({
-                            url: "/user/getAllRecipes",
+                            url: "/get/all/recipe",
                             method: "POST",
                             data: {
                                 token: window.sessionStorage.getItem("authToken")
@@ -28,8 +28,8 @@ $(document).ready(function(){
                                         selectTag.append(options);
                                         for(var i=0;i<result.body.result.length;i++){
                                             var options = $("<option></option>");
-                                            options.attr("value", result.body.result[i]);
-                                            options.text(result.body.result[i]);
+                                            options.attr("value", result.body.result[i].name);
+                                            options.text(result.body.result[i].name);
                                             $(selectTag).append(options);
                                         }
                                         $("#recipeDelete").append(selectTag);
@@ -56,7 +56,6 @@ $(document).ready(function(){
                     $("#recipeDelete").submit(function(e){
                         e.preventDefault();
                         var value = $("#recipeName").val();
-                        console.log(value);
                         $.ajax({
                             url: "/delete/recipe",
                             method: "POST",
