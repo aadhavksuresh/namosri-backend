@@ -103,5 +103,19 @@ module.exports = {
                 reject(responseCodes.internalError);
             })
         });
+    },
+    getOneProducts: function(pid){
+        return new Promise((resolve, reject) => {
+            models.products.findOne({
+                where: {
+                    productId: pid,
+                    visible: 1
+                }
+            }).then(product => {
+                resolve(product)
+            }).catch(err => {
+                reject(responseCodes.internalError);
+            })
+        });
     }
 };

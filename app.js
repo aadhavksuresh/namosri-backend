@@ -6,7 +6,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 
-var index = require('./routes/index');
+var index = require('./routes/main site/index');
+var products = require('./routes/main site/products');
 var user = require('./routes/user');
 var addRequests = require('./routes/add');
 var deleteRequests = require('./routes/delete');
@@ -31,6 +32,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // define all routes here
 app.use('/', index);
+app.use('/products' , products);
+
 app.use('/user', user);
 app.use('/add', addRequests);
 app.use('/delete', deleteRequests);
@@ -40,7 +43,7 @@ app.use('/get' , getRequest);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found' + err);
+  var err = new Error('Not Found ' + err);
   err.status = 404;
   next(err);
 });
