@@ -12,18 +12,18 @@ $(document).ready(function(){
                     $('.main').css("display", "block");
                     $('.errors').css("display", "none");
 
-                    function getProducts(){
+                    function getRecipes(){
                         $.ajax({
-                            url: "/user/getAllProducts",
+                            url: "/user/getAllRecipes",
                             method: "POST",
                             data: {
                                 token: window.sessionStorage.getItem("authToken")
                             },
                             success: function(result){
                                 if(result.body.success){
-                                    if($("#productName").length == 0){
+                                    if($("#recipeName").length == 0){
                                         var selectTag = $("<select></select>");
-                                        selectTag.attr("id", "productName");
+                                        selectTag.attr("id", "recipeName");
                                         var options = $('<option value="0">Choose Which Product to Delete</option>');
                                         selectTag.append(options);
                                         for(var i=0;i<result.body.result.length;i++){
@@ -32,13 +32,13 @@ $(document).ready(function(){
                                             options.text(result.body.result[i]);
                                             $(selectTag).append(options);
                                         }
-                                        $("#productDelete").append(selectTag);
-                                        $("#productDelete").append($('<input type="submit" value="Delete Product">'));
-                                        $("#productDelete").css("display", "block");
-                                        $("#productName").formSelect();
+                                        $("#recipeDelete").append(selectTag);
+                                        $("#recipeDelete").append($('<input type="submit" value="Delete Product">'));
+                                        $("#recipeDelete").css("display", "block");
+                                        $("#recipeName").formSelect();
                                     } else {
-                                        $("#productDelete").empty();
-                                        getProducts();
+                                        $("#recipeDelete").empty();
+                                        getRecipes();
                                     }
                                 } else {
                                     console.log(result);
@@ -51,13 +51,14 @@ $(document).ready(function(){
                         });
                     }
                 
-                    getProducts();
+                    getRecipes();
 
-                    $("#productDelete").submit(function(e){
+                    $("#recipeDelete").submit(function(e){
                         e.preventDefault();
-                        var value = $("#productName").val();
+                        var value = $("#recipeName").val();
+                        console.log(value);
                         $.ajax({
-                            url: "/delete/products",
+                            url: "/delete/recipe",
                             method: "POST",
                             data: {
                                 token: window.sessionStorage.getItem("authToken"),
@@ -66,13 +67,19 @@ $(document).ready(function(){
                             success: function(result){
                                 if(result.body.success){
                                     console.log(result);
-                                    getProducts();
+                                    getRecipes();
+                                    var div = $("<div>"+result.body.result+" deleted successfully</div>");
+                                    $("body").append(div);
                                 } else {
                                     console.log(result);
+                                    var div = $("<div>Some error occured</div>");
+                                    $("body").append(div);
                                 }
                             },
                             error: function(err){
                                 console.log("Can't make the ajax request");
+                                var div = $("<div>Server not responding</div>");
+                                $("body").append(div);
                             }
                         })
                     });

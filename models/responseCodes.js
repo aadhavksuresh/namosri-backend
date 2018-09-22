@@ -15,6 +15,7 @@
     noInstructionExists: 805,
     enterDifferentPassword: 806,
     positionExists: 807,
+    noRecipeExists: 808,
     alreadyExists: 900,
  }
 

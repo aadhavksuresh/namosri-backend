@@ -2,7 +2,7 @@
 var connection = require('./connection');
 var User = require('./user');
 
-var Recipie = connection.sequelize.define('recipie', {
+var Recipe = connection.sequelize.define('recipe', {
 	id: { 
 		type: connection.Sequelize.INTEGER,
 		autoIncrement: true,
@@ -22,7 +22,8 @@ var Recipie = connection.sequelize.define('recipie', {
     },
     picture_url: {
 		type: connection.Sequelize.TEXT,
-		allowNull: false
+		allowNull: false,
+		defaultValue: 'defaultRecipe.jpg'
 	},
 	is_used: {
 		type: connection.Sequelize.BOOLEAN,
@@ -33,7 +34,7 @@ var Recipie = connection.sequelize.define('recipie', {
 	timestamp: true
 });
 
-Recipie.belongsTo(User, {foreignKey: 'u_id', targetKey: 'id'});
-Recipie.sync({force: false});
+Recipe.belongsTo(User, {foreignKey: 'u_id', targetKey: 'id'});
+Recipe.sync({force: false});
 
-module.exports  =  Recipie;
+module.exports  =  Recipe;

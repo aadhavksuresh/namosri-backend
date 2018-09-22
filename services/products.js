@@ -61,7 +61,7 @@ module.exports = {
                     reject(responseCodes.internalError);
                 })
             }
-        })
+        });
     },
     updateProducts: function(params){
         return new Promise((resolve, reject) => {
