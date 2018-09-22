@@ -19,7 +19,7 @@ $(document).ready(function(){
                             data: {
                                 token: window.localStorage.getItem("authToken")
                             },
-                            success: function(result){
+                            success: function(result){  
                                 if(result.body.success){
                                     if($("#recipeName").length == 0){
                                         var selectTag = $("<select></select>");
@@ -33,7 +33,7 @@ $(document).ready(function(){
                                             $(selectTag).append(options);
                                         }
                                         $("#recipeDelete").append(selectTag);
-                                        $("#recipeDelete").append($('<input type="submit" value="Delete Product">'));
+                                        $("#recipeDelete").append($('<input class="waves-effect waves-light btn" type="submit" value="Delete Product">'));
                                         $("#recipeDelete").css("display", "block");
                                         $("#recipeName").formSelect();
                                     } else {

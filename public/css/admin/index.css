@@ -1,0 +1,14 @@
+h3{
+    margin-bottom: 50px;   
+}
+
+.collapsible-header, .keyboard-focused .collapsible-header{
+    background-color: #45a292;
+    font-size: 20px; 
+}
+
+.clickMe{
+    font-size: 20px;
+    margin: 20px;  
+    cursor: pointer; 
+}

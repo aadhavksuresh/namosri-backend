@@ -9,6 +9,7 @@
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
       <title>Admin main page</title>
+      <link rel="stylesheet" href="/css/admin/index.css">
       <%- include partials/loadercss %>
     </head>
 
@@ -16,8 +17,35 @@
       
         <%- include partials/loader %>
 
-        <div class="main">
-          <button>Manipulate User</button>
+        <div class="main container">
+            <h3 class="center-align">Dashboard</h3>
+            <ul class="collapsible popout">
+              <li>
+                <div class="collapsible-header">Manipulate User</div>
+                <div class="collapsible-body">
+                  <div class="clickMe" data-url="/user/signup">Add User</div>
+                  <div class="clickMe" data-url="/user/delete">Delete User</div>
+                  <div class="clickMe" data-url="/user/changeInfo">Update Your Info</div>
+                </div>
+              </li>
+              <li>
+                <div class="collapsible-header">Manipulate Product</div>
+                <div class="collapsible-body">
+                  <div class="clickMe" data-url="/add/products">Add Product</div>
+                  <div class="clickMe" data-url="/delete/products">Delete Product</div>
+                  <div class="clickMe" data-url="/update/products">Update Product Info</div>
+                </div>
+              </li>
+              <li>
+                <div class="collapsible-header">Manipulate Recipe</div>
+                <div class="collapsible-body">
+                  <div class="clickMe" data-url="/add/recipe">Add Recipes</div>
+                  <div class="clickMe" data-url="/delete/recipe">Delete Recipes</div>
+                  <div class="clickMe" data-url="/update/recipe">Update Recipes Info</div>
+                </div>
+              </li>
+            </ul>
+          <!-- <button>Manipulate User</button>
           <button data-url="/user/signup">AddUser</button>
           <button data-url="/user/delete">DeleteUser</button>
           <button data-url="/user/changeInfo">Change Your Info</button>
@@ -30,8 +58,10 @@
           <button>Manipulate Recipes</button>
           <button data-url="/add/recipe">Addrecipes</button>
           <button data-url="/delete/recipe">Deleterecipes</button>
-          <button data-url="/update/recipe">Change recipes Info</button>
+          <button data-url="/update/recipe">Change recipes Info</button>   -->
         </div>
+
+        
 
         <%- include partials/errors %>
 

@@ -37,7 +37,7 @@ $(document).ready(function(){
                                             $(selectTag).append(options);
                                         }
                                         $("#userDelete").append(selectTag);
-                                        $("#userDelete").append($('<input type="submit" value="Delete User">'));
+                                        $("#userDelete").append($('<input class="waves-effect waves-light btn" type="submit" value="Delete User">'));
                                         $("#userDelete").css("display", "block");
                                         $("#userName").formSelect();
                                     } else {

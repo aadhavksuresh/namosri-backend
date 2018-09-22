@@ -32,7 +32,7 @@ $(document).ready(function(){
                                             $(selectTag).append(options);
                                         }
                                         $("#productDelete").append(selectTag);
-                                        $("#productDelete").append($('<input type="submit" value="Delete Product">'));
+                                        $("#productDelete").append($('<input class="waves-effect waves-light btn" type="submit" value="Delete Product">'));
                                         $("#productDelete").css("display", "block");
                                         $("#productName").formSelect();
                                     } else {
