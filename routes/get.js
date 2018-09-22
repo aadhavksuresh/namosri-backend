@@ -19,6 +19,7 @@ router.post('/all/products', function(req, res, next) {
     response.body = {};
     response.body.success = false;
     res.json(response);
+
   });
 });
 
@@ -28,12 +29,30 @@ router.post('/all/recipe', (req, res) => {
     response.body = {};
     response.body.success = true;
     response.body.result = recipes;
+  }).catch(err => {
+    response.header.code = err;
+    response.body = {};
+    response.body.success = false;
+    res.json(response);a
+
+  });
+});
+
+router.post('/one/product', function(req, res, next) {
+  console.log(req.body);
+  productService.getOneProducts(req.body.productId).then(products => {
+    console.log(products);
+    response.header.code = responseCodes.ok;
+    response.body = {};
+    response.body.success = true;
+    response.body.result = products;
     res.json(response);
   }).catch(err => {
     response.header.code = err;
     response.body = {};
     response.body.success = false;
-    res.json(response);
+    res.json(response);a
+
   });
 });
 
