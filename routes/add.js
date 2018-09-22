@@ -3,7 +3,7 @@ var router = express.Router();
 var tokenizer = require('../services/tokenizer');
 var response = require('../models/response');
 var responseCodes = require('../models/responseCodes');
-var recipieService = require('../services/recipie');
+var recipeService = require('../services/recipe');
 var productServices = require('../services/products');
 var instructionService = require('../services/instructions');
 
@@ -12,29 +12,22 @@ router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
-router.get('/recipie', function(req, res, next) {
-  res.render('index');  
+router.get('/recipe', function(req, res, next) {
+  res.render('recipe/add');  
 });
 
-router.post('/recipie', function(req, res, next) {
-  // const params = req.body;
-  // remove after debugging
-  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5hcmVuZHJhMSIsImlkIjoxLCJpYXQiOjE1MzY5MzcwOTcsImV4cCI6MTUzNjk0NDI5N30.RSHCkBCR-imI5c39QoXIdHGUnAjYYiOEFLAmVGForgw";
-  let param = {
-    name: "narendra1111",
-    description: "kumawat",
-    picture_url: " nknknknnkknk",
-    u_id:""
-  };
+router.post('/recipe', function(req, res) {
 
-  tokenizer.varifyUser(token).then((data) => {
+  var params = req.body;
+
+  tokenizer.varifyUser(params.token).then((data) => {
     if(data.status) {
-        param.u_id = data.data.id;
-        recipieService.addRecipie(param).then((recipie) => {
+        params.u_id = data.data.id;
+        recipeService.addrecipe(params).then((recipe) => {
             response.header.code = responseCodes.ok;
             response.body = {};
             response.body.success = true;
-            response.body.recipie = recipie;
+            response.body.result = recipe.name;
             res.json(response);
         }).catch(err => {
             response.header.code = err;

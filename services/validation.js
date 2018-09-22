@@ -37,15 +37,15 @@ module.exports = {
 			});
 		});
 	},
-	recipieExists: function(param) {
+	recipeExists: function(param) {
 		return new Promise((resolve , reject) => {
 			let condition = {
 				name : param
 			};
-			models.recipie.findOne({
+			models.recipe.findOne({
 				where: condition
-			}).then((recipie) => {
-				if(recipie) {
+			}).then((recipe) => {
+				if(recipe) {
 					resolve(true);
 				}else {
 					resolve(false);

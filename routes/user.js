@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var userService = require('../services/user');
 var productService = require('../services/products');
+var recipeService = require('../services/recipe');
 var tokenizer = require('../services/tokenizer');
 var response = require('../models/response');
 var responseCodes = require('../models/responseCodes');
