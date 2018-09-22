@@ -56,24 +56,31 @@ router.post('/recipie', function(req, res, next) {
   });
 });
 
+router.get('/products', (req, res) => {
+    res.render("product/add");
+});
+
 router.post('/products', (req, res) => {
-  let params = req.body;
-    //just for checking
-    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5hcmVuZHJhMSIsImlkIjoxLCJpYXQiOjE1MzY5MzcwOTcsImV4cCI6MTUzNjk0NDI5N30.RSHCkBCR-imI5c39QoXIdHGUnAjYYiOEFLAmVGForgw";
+    let params = req.body;
 
     tokenizer.varifyUser(params.token).then(user => {
-        params.data.userId = user.data.id;
-        productServices.addProduct(params.data).then(product => {
+        params.userId = user.data.id;
+        
+        productServices.addProduct(params).then(product => {
+            console.log(3);
             response.header.code = responseCodes.ok;
             response.body.success = true;
             response.body.result = product
             res.json(response);
         }).catch(err => {
+            console.log(4);
             response.header.code = err;
             response.body.success = false;
             res.json(response);
         });
+        
     }).catch(err => {
+        console.log(5);
         response.header.code = err;
         response.body = {};
         response.body.success = false;

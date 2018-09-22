@@ -8,17 +8,22 @@
 
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <%- include partials/loadercss %>
     </head>
 
     <body>
-        
-        <h3>invalid</h3>
-        <form id="signupForm">
-            <input type="text" id="username" placeholder="username">
-            <input type="password" id="password" placeholder="password">
-            <input type="password" id="verifyPassword" placeholder="enter password again"/>
-            <input type="submit" value="SignUp">
-        </form>
+        <%- include partials/loader %>
+        <div class="main">
+          <h3>invalid</h3>
+          <form id="signupForm">
+              <input type="text" id="username" placeholder="username">
+              <input type="password" id="password" placeholder="password">
+              <input type="password" id="verifyPassword" placeholder="enter password again"/>
+              <input type="submit" value="SignUp">
+          </form>
+        </div>
+
+        <%- include partials/errors %>
 
       <!--JavaScript at end of body for optimized loading-->
       <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>

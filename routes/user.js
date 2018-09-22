@@ -1,10 +1,33 @@
 var express = require('express');
 var router = express.Router();
 var userService = require('../services/user');
+var productService = require('../services/products');
 var tokenizer = require('../services/tokenizer');
 var response = require('../models/response');
 var responseCodes = require('../models/responseCodes');
 var bcrypt = require("bcrypt");
+
+//remove after creating first user
+var models = require("../models/models");
+var bcrypt = require("bcrypt");
+
+//remove after creating first user
+router.get('/first', (req, res) => {
+  bcrypt.hash('admin', 2).then(hash => {
+    models.user.create({
+      username: 'admin',
+      password: hash,
+      deactivated: 0,
+      id: 1
+    }).then(user => {
+      res.send(user.dataValues);
+    }).catch(err => {
+      res.send("some sql errors occured");
+    })
+  }).catch(err => {
+    res.send("some bcrypt error occured");
+  })
+});
 
 router.get('/', function(req, res, next) {
   res.render("admin/index");
@@ -25,11 +48,7 @@ router.post('/verifier', (req, res) => {
 });
 
 router.get('/signup', function(req, res, next) {
-  tokenizer.varifyUser(req.query.content).then(user => {
-    res.render("admin/signup");
-  }).catch(err => {
-    res.redirect("/user/login?invalid=true");
-  });
+  res.render("admin/signup");
 });
 
 router.post('/signup', function(req, res) {
@@ -98,18 +117,15 @@ router.post('/login', (req, res) => {
       response.body.token = token;
       res.json(response);
 		}).catch(err => {
-			response.header.code = err;
+      response.header.code = err;
+      response.body = {};
       response.body.success = false;
       res.json(response);
 		});
 });
 
 router.get('/delete', (req, res) => {
-  tokenizer.varifyUser(req.query.content).then(user => {
-    res.render('admin/delete');
-  }).catch(err => {
-    res.redirect("/user/login?invalid=true");
-  });
+  res.render('admin/delete');
 });
 
 router.post('/delete', (req, res) => {
@@ -156,7 +172,6 @@ router.post('/getAll', (req, res) => {
         }
         res.json(response);
       }).catch(err => {
-        console.log("why");
         console.log(err);
         response.header.code = err;
         response.body = {};
@@ -171,7 +186,6 @@ router.post('/getAll', (req, res) => {
       res.json(response);
     }
   }).catch(err => {
-    console.log(2);
     response.header.code = err;
     response.body = {};
     response.body.success = false;
@@ -179,12 +193,35 @@ router.post('/getAll', (req, res) => {
   });
 });
 
-router.get('/changeInfo', (req, res) => {
-  tokenizer.varifyUser(req.query.content).then(user => {
-    res.render('admin/change');
+router.post('/getAllProducts', (req, res) => {
+  tokenizer.varifyUser(req.body.token).then(user => {
+    if(user.data.id == 1){
+      productService.getAllProducts(req.body).then(products => {
+        response.header.code = responseCodes.ok;
+        response.body = {};
+        response.body.success = true;
+        response.body.result = [];
+        for(var i = 0; i<products.length; i++){
+          response.body.result.push(products[i].dataValues.name);
+        }
+        res.json(response);
+      }).catch(err => {
+        response.header.code = err;
+        response.body = {};
+        response.body.success = false;
+        res.json(response);
+      })
+    }
   }).catch(err => {
-    res.redirect('/user/login?invalid=true');
+    response.header.code = responseCodes.unAuthorized;
+    response.body = {};
+    response.body.success = false;
+    res.json(response);
   });
+});
+
+router.get('/changeInfo', (req, res) => {
+  res.render('admin/change');
 });
 
 router.post('/changeInfo', (req, res) => {

@@ -14,6 +14,7 @@
     noProductExists: 804,
     noInstructionExists: 805,
     enterDifferentPassword: 806,
+    positionExists: 807,
     alreadyExists: 900,
  }
 

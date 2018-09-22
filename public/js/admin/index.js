@@ -11,6 +11,10 @@ $(document).ready(function(){
                     $('.loader').css("display", "none");
                     $('.main').css("display", "block");
                     $('.errors').css("display", "none");
+
+                    $('button').click(function(e){
+                        window.location.href = $(e.target).attr('data-url');
+                    });
                 } else {
                     $('.loader').css("display", "none");
                     $('.main').css("display", "none");

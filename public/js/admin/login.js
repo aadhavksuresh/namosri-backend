@@ -13,10 +13,16 @@ $(document).ready(function(){
             success: function(result){
                 if(result.body.success){
                     window.sessionStorage.setItem("authToken", result.body.token);
+                    console.log("yeep");
                     window.location.href = '/user';
                 } else {
+                    console.log("error");
                     window.location.href = '/user/login?invalid=true'
                 }
+            },
+            error: function(err){
+                var div = $("<div>Server not responding</div>");
+                $('body').append(div);
             }
         });
     })

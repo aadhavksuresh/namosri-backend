@@ -59,6 +59,8 @@ module.exports = {
                                     }).catch((err) => {                                        
                                         reject(responseCodes.internalError);
                                     });
+                                } else {
+                                    reject(responseCodes.noUserExists);
                                 }
                             }).catch(err => {
                                 reject(responseCodes.internalError);

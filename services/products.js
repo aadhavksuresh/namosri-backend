@@ -12,11 +12,24 @@ module.exports = {
                     if(result){
                         reject(responseCodes.productAlreadyExists);
                     } else {
-                        models.products.create(params).then(product => {
-                            resolve(product.dataValues);
+                        models.products.find({
+                            where: {
+                                position: params.position
+                            }
+                        }).then(product => {
+                            if(!product){
+                                models.products.create(params).then(product => {
+                                    resolve(product.dataValues);
+                                }).catch(err => {
+                                    reject(responseCodes.internalError);
+                                });
+                            } else {
+                                reject(responseCodes.positionExists);
+                            }
                         }).catch(err => {
-                            reject(responseCodes.internalError);
+                            console.log(err);
                         });
+                        
                     }
                 }).catch(err => {
                     reject(responseCodes.invalidRequest);
@@ -50,22 +63,24 @@ module.exports = {
             }
         })
     },
-    updateProducts: function(oldValue, newValues){
+    updateProducts: function(params){
         return new Promise((resolve, reject) => {
-            if(!oldValue.name || !newValues){
+            if(!params.oldName || !params.newName){
                 reject(responseCodes.invalidRequest);
             } else {
                 models.products.findOne({
                     where: {
-                        name: oldValue.name
+                        name: params.oldName
                     }
                 }).then(product => {
                     if(!product){
                         reject(responseCodes.noProductExists);
                     }
-                    product.updateAttributes(
-                        newValues
-                    ).then(product => {
+                    product.updateAttributes({
+                        name: params.newName,
+                        description: params.newDescription,
+                        position: params.newPosition
+                    }).then(product => {
                         resolve(product.dataValues);
                     }).catch(err => {
                         reject(responseCodes.internalError);
@@ -74,6 +89,19 @@ module.exports = {
                     reject(responseCodes.internalError);
                 });
             }
+        });
+    },
+    getAllProducts: function(params){
+        return new Promise((resolve, reject) => {
+            models.products.findAll({
+                where: {
+                    visible: 1
+                }
+            }).then(product => {
+                resolve(product)
+            }).catch(err => {
+                reject(responseCodes.internalError);
+            })
         });
     }
 };
