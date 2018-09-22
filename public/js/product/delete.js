@@ -1,10 +1,10 @@
 $(document).ready(function(){
-    if(window.sessionStorage.getItem("authToken")){
+    if(window.localStorage.getItem("authToken")){
         $.ajax({
             url: '/user/verifier',
             method: "POST",
             data: {
-                token: window.sessionStorage.getItem('authToken')
+                token: window.localStorage.getItem('authToken')
             },
             success: function(result){
                 if(result.body.success){
@@ -16,7 +16,7 @@ $(document).ready(function(){
                             url: "/get/all/products",
                             method: "POST",
                             data: {
-                                token: window.sessionStorage.getItem("authToken")
+                                token: window.localStorage.getItem("authToken")
                             },
                             success: function(result){
                                 if(result.body.success){
@@ -59,7 +59,7 @@ $(document).ready(function(){
                             url: "/delete/products",
                             method: "POST",
                             data: {
-                                token: window.sessionStorage.getItem("authToken"),
+                                token: window.localStorage.getItem("authToken"),
                                 name: value
                             },
                             success: function(result){
@@ -77,12 +77,14 @@ $(document).ready(function(){
                     });
 
                 } else {
+                    window.localStorage.removeItem("authToken");
                     $('.loader').css("display", "none");
                     $('.main').css("display", "none");
                     $('.errors').css("display", "block");
                 }
             },
             error: function(err){
+                window.localStorage.removeItem("authToken");
                 $('.errors').text("Either the Server is down or Check Your internet connectivity");
                 $('.loader').css("display", "none");
                 $('.main').css("display", "none");
