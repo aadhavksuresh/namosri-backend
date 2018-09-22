@@ -193,33 +193,6 @@ router.post('/getAll', (req, res) => {
   });
 });
 
-router.post('/getAllProducts', (req, res) => {
-  tokenizer.varifyUser(req.body.token).then(user => {
-    if(user.data.id == 1){
-      productService.getAllProducts(req.body).then(products => {
-        response.header.code = responseCodes.ok;
-        response.body = {};
-        response.body.success = true;
-        response.body.result = [];
-        for(var i = 0; i<products.length; i++){
-          response.body.result.push(products[i].dataValues.name);
-        }
-        res.json(response);
-      }).catch(err => {
-        response.header.code = err;
-        response.body = {};
-        response.body.success = false;
-        res.json(response);
-      })
-    }
-  }).catch(err => {
-    response.header.code = responseCodes.unAuthorized;
-    response.body = {};
-    response.body.success = false;
-    res.json(response);
-  });
-});
-
 router.get('/changeInfo', (req, res) => {
   res.render('admin/change');
 });

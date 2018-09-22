@@ -91,7 +91,7 @@ module.exports = {
             }
         });
     },
-    getAllProducts: function(params){
+    getAllProducts: function(){
         return new Promise((resolve, reject) => {
             models.products.findAll({
                 where: {
