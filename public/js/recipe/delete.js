@@ -65,20 +65,19 @@ $(document).ready(function(){
                             },
                             success: function(result){
                                 if(result.body.success){
-                                    console.log(result);
                                     getRecipes();
                                     var div = $("<div>"+result.body.result+" deleted successfully</div>");
                                     $("body").append(div);
+                                    var div = $("<div class='card-panel green'>"+result.body.result+" Deleted Successfully</div>");
+                                    $(".info").append(div);
                                 } else {
-                                    console.log(result);
-                                    var div = $("<div>Some error occured</div>");
-                                    $("body").append(div);
+                                    var div = $("<div class='card-panel red'>Error in Deleting the Recipe</div>");
+                                    $(".info").append(div);
                                 }
                             },
                             error: function(err){
-                                console.log("Can't make the ajax request");
-                                var div = $("<div>Server not responding</div>");
-                                $("body").append(div);
+                                var div = $("<div class='card-panel red'>Either the Server is Down or Your Internet</div>");
+                                $(".info").append(div);
                             }
                         })
                     });

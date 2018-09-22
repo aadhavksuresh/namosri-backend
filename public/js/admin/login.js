@@ -7,25 +7,29 @@ $(document).ready(function(){
                 token: window.localStorage.getItem('authToken')
             },
             success: function(result){
+                console.log(result);
                 if(result.body.success){
                     window.location.href = '/user';
                 } else {
                     window.localStorage.removeItem("authToken");
                     $('.loader').css("display", "none");
                     $('.main').css("display", "block");
+                    $('.errors').css("display", "none");
                     loginForm();
                 }
             },
             error: function(err){
                 window.localStorage.removeItem("authToken");
+                $('.errors').text("Either the Server is Down or Your Internet");
                 $('.loader').css("display", "none");
-                $('.main').css("display", "block");
-                loginForm();
+                $('.main').css("display", "none");
+                $('.errors').css("display", "block");
             }            
         })
     } else {
         $('.loader').css("display", "none");
         $('.main').css("display", "block");
+        $('.errors').css("display", "none");
         loginForm();
     }
 

@@ -29,21 +29,21 @@ $(document).ready(function(){
                             },
                             success: function(result){
                                 if(result.body.success){
-                                    var div = $("<div>"+result.body.result.name+" added successfully</div>");
-                                    $("body").append(div);
+                                    var div = $("<div class='card-panel green'>"+result.body.result.name+" added Successfully</div>");
+                                    $(".info").append(div);
                                 } else {
                                     if(result.header.code == 807){
-                                        var div = $("<div>A Product already exists at that position</div>");
-                                        $('body').append(div);
+                                        var div = $("<div class='card-panel red'>A Product already exists at that position</div>");
+                                        $(".info").append(div);
                                     } else {
-                                        var div = $("<div>Some error occured</div>");
-                                        $('body').append(div);
+                                        var div = $("<div class='card-panel red'>Error in adding the product</div>");
+                                        $(".info").append(div);
                                     }
                                 }
                             },
                             error: function(err){
-                                var div = $("<div>Server down</div>");
-                                $('body').append(div);
+                                var div = $("<div class='card-panel red'>Either the Server is Down or Your Internet</div>");
+                                $(".info").append(div);
                             }
                         })
 

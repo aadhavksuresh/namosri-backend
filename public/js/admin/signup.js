@@ -19,8 +19,9 @@ $(document).ready(function(){
                         var VerifyPassword = $("#verifyPassword").val();
                 
                         if(Password != VerifyPassword){
-                            var div = $("<div>enter same password</div>");
-                            $('body').append(div);
+                            console.log("why");
+                            var div = $("<div class='card-panel red'>Enter Same Password</div>");
+                            $('.info').append(div);
                         } else {
                             $.ajax({
                                 url: "/user/signup",
@@ -33,16 +34,16 @@ $(document).ready(function(){
                                 },
                                 success: function(result){
                                     if(result.body.success){
-                                        var div = $("<div>"+result.body.user+" added successfully </div>");
-                                        $('body').append(div);
+                                        var div = $("<div class='card-panel green'>"+result.body.user+" added successfully </div>");
+                                        $('.info').append(div);
                                     } else {
-                                        var div = $("<div>Error in adding the user</div>");
-                                        $('body').append(div);
+                                        var div = $("<div class='card-panel red'>Error in Adding User</div>");
+                                        $('.info').append(div);
                                     }
                                 },
                                 error: function(err){
-                                    var div = $("<div>server not responding</div>");
-                                        $('body').append(div);
+                                    var div = $("<div class='card-panel red'>Either the Server is Down or Your Internet</div>");
+                                    $('.info').append(div);
                                 }
                             })
                         }

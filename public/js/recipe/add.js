@@ -27,17 +27,16 @@ $(document).ready(function(){
                             },
                             success: function(result){
                                 if(result.body.success){
-                                    console.log(result);
-                                    var div = $("<div>"+result.body.result+" added successfully</div>");
-                                    $("body").append(div);
+                                    var div = $("<div class='card-panel green'>"+result.body.result+" Added Successfully </div>");
+                                    $(".info").append(div);
                                 } else {
-                                    var div = $("<div>Some error occured added successfully</div>");
-                                    $("body").append(div);
+                                    var div = $("<div class='card-panel red'>Some error occured added successfully</div>");
+                                    $(".info").append(div);
                                 }
                             },
                             error: function(err){
-                                var div = $("<div>Server down</div>");
-                                $('body').append(div);
+                                var div = $("<div class='card-panel red'>Either the Server is Down or Your Internet</div>");
+                                $(".info").append(div);
                             }
                         })
 
