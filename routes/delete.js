@@ -6,9 +6,9 @@ let response = require('../models/response');
 let responseCodes = require('../models/responseCodes');
 let tokenizer = require("../services/tokenizer");
 
-router.get('/products', (req, res) => {
-    res.render('product/delete');
-});
+// router.get('/product/:id', (req, res) => {
+//     res.render('product/delete' , {pid : req.params.id});
+// });
 
 router.get('/recipe', (req, res) => {
     res.render('recipe/delete');
@@ -16,6 +16,7 @@ router.get('/recipe', (req, res) => {
 
 router.post('/products', (req, res) => {
     let params = req.body;
+    console.log(params);
     tokenizer.varifyUser(params.token).then(user => {
         params.userId = user.data.id;
         productServices.deleteProduct(params).then(product => {

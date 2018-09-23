@@ -39,6 +39,7 @@ router.post('/verifier', (req, res) => {
     response.header.code = responseCodes.ok;
     response.body = {};
     response.body.success = true;
+    response.body.result = user.data.username;
     res.json(response);
   }).catch(err => {
     response.header.code = responseCodes.unAuthorized;
