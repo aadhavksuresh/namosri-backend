@@ -1,45 +1,50 @@
-$(document).ready(function(){
-    if(window.localStorage.getItem("authToken")){
+$(document).ready(function() {
+    if (window.localStorage.getItem("authToken")) {
         $.ajax({
-            url: '/user/verifier',
+            url: "/user/verifier",
             method: "POST",
             data: {
-                token: window.localStorage.getItem('authToken')
+                token: window.localStorage.getItem("authToken")
             },
-            success: function(result){
-                if(result.body.success){
-                    function getProducts(){
-                       $.ajax({
+            success: function(result) {
+                if (result.body.success) {
+                    function getProducts() {
+                        $.ajax({
                             url: "/get/one/product",
                             method: "POST",
                             data: {
-                                productId :  $("#pid").html() 
+                                productId: $("#pid").html()
                             },
-                            success: function(result){
-                                if(result.body.success){
+                            success: function(result) {
+                                if (result.body.success) {
                                     product = result.body.result;
-                                    
-                                    $("#oldName").attr("value" , product.name);
-                                    // $("#newName").attr("value" , product.name);
-                                    $("#newDescription").text(product.description);
-                                    $("#newPosition").attr("value" , product.position);
 
-                                     M.textareaAutoResize($("#newDescription"))
-                                     M.updateTextFields();
-                                    $('.loader').css("display", "none");
-                                    $('.main').css("display", "block");
-                                    $('.errors').css("display", "none");
+                                    $("#oldName").attr("value", product.name);
+                                    // $("#newName").attr("value" , product.name);
+                                    $("#newDescription").text(
+                                        product.description
+                                    );
+                                    $("#newPosition").attr(
+                                        "value",
+                                        product.position
+                                    );
+
+                                    M.textareaAutoResize($("#newDescription"));
+                                    M.updateTextFields();
                                 }
                             },
-                            error: function(err){
+                            error: function(err) {
                                 console.log("error can't make the request");
                             }
-                        });  
+                        });
                     }
-                
-                    getProducts();
 
-                    $('#productUpdate').submit(function(e){
+                    getProducts();
+                    $(".loader").css("display", "none");
+                    $(".main").css("display", "block");
+                    $(".errors").css("display", "none");
+
+                    $("#productUpdate").submit(function(e) {
                         e.preventDefault();
                         var oldName = $("#oldName").val();
                         var newName = $("#newName").val();
@@ -47,7 +52,7 @@ $(document).ready(function(){
                         var newPosition = $("#newPosition").val();
 
                         $.ajax({
-                            url: '/update/products',
+                            url: "/update/products",
                             method: "POST",
                             data: {
                                 oldName: oldName,
@@ -56,40 +61,47 @@ $(document).ready(function(){
                                 newPosition: newPosition,
                                 token: window.localStorage.getItem("authToken")
                             },
-                            success: function(result){
-                                if(result.body.success){
-                                    var div = $("<div class='card-panel green'>Product Modified Successfully</div>");
+                            success: function(result) {
+                                if (result.body.success) {
+                                    var div = $(
+                                        "<div class='card-panel green'>Product Modified Successfully</div>"
+                                    );
                                     $(".info").append(div);
                                 } else {
-                                    var div = $("<div class='card-panel red'>Error in modifing the Product</div>");
+                                    var div = $(
+                                        "<div class='card-panel red'>Error in modifing the Product</div>"
+                                    );
                                     $(".info").append(div);
                                 }
-                            }, 
-                            error: function(err){  
-                                var div = $("<div class='card-panel red'>Either the Server is Down or Your Internet</div>");
+                            },
+                            error: function(err) {
+                                var div = $(
+                                    "<div class='card-panel red'>Either the Server is Down or Your Internet</div>"
+                                );
                                 $(".info").append(div);
                             }
                         });
                     });
-
                 } else {
                     window.localStorage.removeItem("authToken");
-                    $('.loader').css("display", "none");
-                    $('.main').css("display", "none");
-                    $('.errors').css("display", "block");
+                    $(".loader").css("display", "none");
+                    $(".main").css("display", "none");
+                    $(".errors").css("display", "block");
                 }
             },
-            error: function(err){
+            error: function(err) {
                 window.localStorage.removeItem("authToken");
-                $('.errors').text("Either the Server is down or Check Your internet connectivity");
-                $('.loader').css("display", "none");
-                $('.main').css("display", "none");
-                $('.errors').css("display", "block");
-            }            
-        })
+                $(".errors").text(
+                    "Either the Server is down or Check Your internet connectivity"
+                );
+                $(".loader").css("display", "none");
+                $(".main").css("display", "none");
+                $(".errors").css("display", "block");
+            }
+        });
     } else {
-        $('.loader').css("display", "none");
-        $('.main').css("display", "none");
-        $('.errors').css("display", "block");
+        $(".loader").css("display", "none");
+        $(".main").css("display", "none");
+        $(".errors").css("display", "block");
     }
 });

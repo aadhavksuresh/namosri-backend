@@ -95,5 +95,19 @@ module.exports = {
                 reject(responseCodes.internalError);
             })
         });
+    },
+    getOneRecipe: function(rid){
+        return new Promise((resolve, reject) => {
+            models.recipe.findOne({
+                where: {
+                    id: rid,
+                    is_used: 1
+                }
+            }).then(recipe => {
+                resolve(recipe)
+            }).catch(err => {
+                reject(responseCodes.internalError);
+            })
+        });
     }
 };

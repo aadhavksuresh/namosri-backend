@@ -10,13 +10,12 @@ let tokenizer = require("../services/tokenizer");
 //     res.render('product/delete' , {pid : req.params.id});
 // });
 
-router.get('/recipe', (req, res) => {
-    res.render('recipe/delete');
-});
+// router.get('/recipe', (req, res) => {
+//     res.render('recipe/delete');
+// });
 
 router.post('/products', (req, res) => {
     let params = req.body;
-    console.log(params);
     tokenizer.varifyUser(params.token).then(user => {
         params.userId = user.data.id;
         productServices.deleteProduct(params).then(product => {
