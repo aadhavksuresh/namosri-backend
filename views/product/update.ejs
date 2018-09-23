@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <!--Import Google Icon Font-->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!--Import materialize.css-->
-  <link type="text/css" rel="stylesheet" href="/libs/materialize.min.css" media="screen,projection" />
+  <link type="text/css" rel="stylesheet" href="/libs/materialize.min.css"  media="screen,projection"/>
 
   <!--Let browser know website is optimized for mobile-->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Product update page</title>
   <link rel="stylesheet" href="/css/product/update.css">
   <%- include partials/loadercss %>
@@ -16,9 +15,7 @@
 
 <body>
   <%- include partials/loader %>
-  <div id="pid" hidden>
-    <%- pid %>
-  </div>
+  <div  id="pid" hidden><%- pid %></div>
   <div class="main container">
     <div class="row">
       <div class="col s12 m2"></div>
@@ -26,38 +23,36 @@
         <h3 class="center-align">Update Product</h3>
         <form id="productUpdate">
           <div class="input-field" id="productName">
-            <input type="text" id="oldName" readonly>
-            <label for="newName">Readonly</label>
-          </div>
-          <div class="input-field">
-            <input type="text" id="newName">
-            <label for="newName">New Name</label>
-          </div>
-          <div class="input-field">
-            <!-- <input type="text" id="newDescription"> -->
-            <textarea id="newDescription" class="materialize-textarea"></textarea>
-            <!-- <label for="newDescription">New Description</label> -->
-          </div>
-          <div class="input-field">
-            <input type="number" id="newPosition">
-            <!-- <label for="newPosition">New Position</label> -->
-          </div>
-          <input class="waves-effect waves-light btn" type="submit" value="Update Product">
-        </form>
+           <input type="text" id="oldName" readonly >
+           <label  for="newName">Readonly</label>
+         </div>
+         <div class="input-field">
+          <input type="text" id="newName">
+          <label for="newName">New Name</label>
+        </div>
+        <div class="input-field">
+          <!-- <input type="text" id="newDescription"> -->
+          <textarea id="newDescription" class="materialize-textarea"></textarea>
+          <!-- <label for="newDescription">New Description</label> -->
+        </div>
+        <div class="input-field">
+          <input type="number" id="newPosition">
+          <!-- <label for="newPosition">New Position</label> -->
+        </div>
+        <input class="waves-effect waves-light btn" type="submit" value="Update Product">
+      </form>
 
-        <div class="info"></div>
-      </div>
-      <div class="col s12 m2"></div>
+      <div class="info"></div>
     </div>
+    <div class="col s12 m2"></div>
   </div>
+</div>
 
-  <%- include partials/errors %>
+<%- include partials/errors %>
 
-  <!--JavaScript at end of body for optimized loading-->
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-    crossorigin="anonymous"></script>
-  <script type="text/javascript" src="/js/libs/materialize.min.js"></script>
-  <script src="/js/product/update.js"></script>
+<!--JavaScript at end of body for optimized loading-->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/js/libs/materialize.min.js"></script>
+<script src="/js/product/update.js"></script>
 </body>
-
 </html>

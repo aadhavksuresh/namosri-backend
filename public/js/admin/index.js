@@ -201,17 +201,15 @@ $(document).ready(function() {
             },
             error: function(err) {
                 window.localStorage.removeItem("authToken");
-                $(".errors").text(
-                    "Either the Server is down or Check Your internet connectivity"
-                );
-                $(".loader").css("display", "none");
-                $(".main").css("display", "none");
-                $(".errors").css("display", "block");
-            }
-        });
-    } else {
-        $(".loader").css("display", "none");
-        $(".main").css("display", "none");
-        $(".errors").css("display", "block");
-    }
+                $('.errors').text("Either the Server is down or Check Your internet connectivity");
+                $('.loader').css("display", "none");
+                $('.main').css("display", "none");
+                $('.errors').css("display", "block");
+            }            
+        })
+} else {
+    $('.loader').css("display", "none");
+    $('.main').css("display", "none");
+    $('.errors').css("display", "block");
+}
 });
