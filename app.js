@@ -12,7 +12,8 @@ var user = require('./routes/user');
 var addRequests = require('./routes/add');
 var deleteRequests = require('./routes/delete');
 var updateRequests = require('./routes/update');
-var getRequest = require('./routes/get')
+var getRequest = require('./routes/get');
+var uploadRequest = require('./routes/upload');
 
 var app = express();
 
@@ -39,6 +40,7 @@ app.use('/add', addRequests);
 app.use('/delete', deleteRequests);
 app.use('/update', updateRequests);
 app.use('/get' , getRequest);
+app.use('/upload' , uploadRequest);
 
 
 // catch 404 and forward to error handler

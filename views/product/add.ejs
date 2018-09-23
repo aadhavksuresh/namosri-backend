@@ -32,9 +32,27 @@
                 <input type="number" id="position">
                 <label for="position">Position</label>
               </div>
-              <input class="waves-effect waves-light btn" type="submit" value="Add Product">
+              <div class="input-field">
+                <input type="text" id="picture" readonly>
+                <!-- <label for="picture">Picture</label> -->
+              </div>
+
+              <input id="submit-add-product" class="btn white-text" type="submit" value="Add Product">
             </form>
 
+            <form id="picture-form" enctype="multipart/form-data" action="/upload/photo" method="POST" >
+              <div class="file-field input-field">
+              <div class="btn">
+                <span>Picture</span>
+                <input type="file" id="picture-file" name="productPhoto">
+              </div>
+              <div class="file-path-wrapper">
+                <input class="file-path validate" type="text">
+              </div>
+            </div>
+             
+              <input class="waves-effect waves-light btn" type="submit" id="upload-pic" value="Upload First">
+            </form>
             <div class="info"></div>
         </div>
 
@@ -43,6 +61,7 @@
       <!--JavaScript at end of body for optimized loading-->
       <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
       <script type="text/javascript" src="/js/libs/materialize.min.js"></script>
+      <script src="http://malsup.github.com/jquery.form.js"></script> 
       <script src="/js/product/add.js"></script>
     </body>
   </html>
