@@ -31,16 +31,16 @@ $(document).ready(function(){
                             },
                             success: function(result){
                                 if(result.body.success){
-                                    var div = $("<div>product modified</div>");
-                                    $("body").append(div);
+                                    var div = $("<div class='card-panel green'>Product Modified Successfully</div>");
+                                    $(".info").append(div);
                                 } else {
-                                    var div = $("<div>error in response</div>");
-                                    $("body").append(div);
+                                    var div = $("<div class='card-panel red'>Error in modifing the Product</div>");
+                                    $(".info").append(div);
                                 }
                             }, 
                             error: function(err){  
-                                var div = $("<div>errors while making ajax request</div>");
-                                $("body").append(div);
+                                var div = $("<div class='card-panel red'>Either the Server is Down or Your Internet</div>");
+                                $(".info").append(div);
                             }
                         });
                     });

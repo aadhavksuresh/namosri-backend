@@ -37,7 +37,7 @@ $(document).ready(function(){
                                             $(selectTag).append(options);
                                         }
                                         $("#userDelete").append(selectTag);
-                                        $("#userDelete").append($('<input type="submit" value="Delete User">'));
+                                        $("#userDelete").append($('<input class="waves-effect waves-light btn" type="submit" value="Delete User">'));
                                         $("#userDelete").css("display", "block");
                                         $("#userName").formSelect();
                                     } else {
@@ -72,13 +72,18 @@ $(document).ready(function(){
                                 success: function(result){
                                     if(result.body.success){
                                         getUsers();
+                                        console.log(result);
+                                        var div = $("<div class='card-panel green'>"+result.body.result+" Deleted Successfully</div>");
+                                        $(".info").append(div);
                                     } else {   
                                         $("#userDelete").css("display", "none");
-                                        console.log("wow");
+                                        var div = $("<div class='card-panel green'>Error in Deleting the user</div>");
+                                        $(".info").append(div);
                                     }
                                 },
                                 error: function(err){
-                                    console.log("can't make ajax request");
+                                    var div = $("<div class='card-panel green'>Either Your Server is down or Your Internet</div>");
+                                    $(".info").append(div);
                                 }
                             });
                         }

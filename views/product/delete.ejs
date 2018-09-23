@@ -9,6 +9,7 @@
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
       <title>Add Product</title>
+      <link rel="stylesheet" href="/css/product/delete.css">
       <%- include partials/loadercss %>
     </head>
 
@@ -16,11 +17,13 @@
       
         <%- include partials/loader %>
 
-        <div class="main">
-            <h3>delete product</h3>
+        <div class="main container">
+            <h3 class="center-align">Delete Product</h3>
             <div class="row">
                 <form class="col s12" id="productDelete" style="display: none"></form>
             </div>
+            
+            <div class="info"></div>
         </div>  
 
         <%- include partials/errors %>

@@ -36,16 +36,17 @@ $(document).ready(function(){
                                 },
                                 success: function(result){
                                     if(result.body.success){
-                                        // div.text(result.body.result+" modified in the database");
                                         window.localStorage.setItem("authToken", result.body.token);
-                                        window.location.href="/user";
-                                        // $('body').append(div);
+                                        var div = $("<div class='card-panel green'>"+result.body.result+" User Updated Successfully</div>");
+                                        $(".info").append(div);
                                     } else {
-                                        console.log(result);
+                                        var div = $("<div class='card-panel red'>Error in Updating the User</div>");
+                                        $(".info").append(div);
                                     }
                                 },
                                 error: function(err){
-                                    console.log("error");
+                                    var div = $("<div class='card-panel red'>Either the Server is Down or Your Internet</div>");
+                                    $(".info").append(div);
                                 }
                             })
                         }

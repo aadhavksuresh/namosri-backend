@@ -1,0 +1,21 @@
+/* .input-field{
+    background-color: #379683;
+    padding: 10px;
+} */
+
+*{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+h3{
+    color: #ffffff;
+}
+
+.input-field label{
+    color: #ffffff;
+}
+
+.btn{
+    background-color: #45a292;
+}

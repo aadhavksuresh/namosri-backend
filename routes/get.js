@@ -19,7 +19,6 @@ router.post('/all/products', function(req, res, next) {
     response.body = {};
     response.body.success = false;
     res.json(response);
-
   });
 });
 
@@ -29,12 +28,12 @@ router.post('/all/recipe', (req, res) => {
     response.body = {};
     response.body.success = true;
     response.body.result = recipes;
+    res.json(response);
   }).catch(err => {
     response.header.code = err;
     response.body = {};
     response.body.success = false;
-    res.json(response);a
-
+    res.json(response);
   });
 });
 

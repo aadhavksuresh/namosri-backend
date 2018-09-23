@@ -1,4 +1,6 @@
 $(document).ready(function(){
+    $('.collapsible').collapsible();
+
     if(window.localStorage.getItem("authToken")){
         $.ajax({
             url: '/user/verifier',
@@ -12,7 +14,7 @@ $(document).ready(function(){
                     $('.main').css("display", "block");
                     $('.errors').css("display", "none");
 
-                    $('button').click(function(e){
+                    $('.clickMe').click(function(e){
                         window.location.href = $(e.target).attr('data-url');
                     });
                 } else {

@@ -9,6 +9,7 @@
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
       <title>Product update page</title>
+      <link rel="stylesheet" href="/css/product/update.css">
       <%- include partials/loadercss %>
     </head>
 
@@ -16,14 +17,30 @@
       
         <%- include partials/loader %>
 
-        <div class="main">
+        <div class="main container">
+            <h3 class="center-align">Update Product</h3>
             <form id="productUpdate">
-                <input type="text" id="oldName" placeholder="Old Name">
-                <input type="text" id="newName" placeholder="New Name">
-                <input type="text" id="newDescription" placeholder="New Description">
-                <input type="number" id="newPosition" placeholder="New Position">
-                <input type="submit" value="Update Product">
+                <div class="input-field">
+                  <input type="text" id="oldName">
+                  <label for="oldName">Old Name</label>
+                </div>
+                <div class="input-field">
+                  <input type="text" id="newName">
+                  <label for="newName">New Name</label>
+                </div>
+                <div class="input-field">
+                  <!-- <input type="text" id="newDescription"> -->
+                  <textarea id="newDescription" class="materialize-textarea"></textarea>
+                  <label for="newDescription">New Description</label>
+                </div>
+                <div class="input-field">
+                  <input type="number" id="newPosition">
+                  <label for="newPosition">New Position</label>
+                </div>
+                <input class="waves-effect waves-light btn" type="submit" value="Update Product">
             </form>
+
+            <div class="info"></div>
         </div>
 
         <%- include partials/errors %>

@@ -11,6 +11,7 @@ $(document).ready(function(){
                     $('.loader').css("display", "none");
                     $('.main').css("display", "block");
                     $('.errors').css("display", "none");
+
                     function getProducts(){
                         $.ajax({
                             url: "/get/all/products",
@@ -32,7 +33,7 @@ $(document).ready(function(){
                                             $(selectTag).append(options);
                                         }
                                         $("#productDelete").append(selectTag);
-                                        $("#productDelete").append($('<input type="submit" value="Delete Product">'));
+                                        $("#productDelete").append($('<input class="waves-effect waves-light btn" type="submit" value="Delete Product">'));
                                         $("#productDelete").css("display", "block");
                                         $("#productName").formSelect();
                                     } else {
@@ -40,7 +41,6 @@ $(document).ready(function(){
                                         getProducts();
                                     }
                                 } else {
-                                    console.log(result);
                                     console.log("incorrect");
                                 }
                             },
@@ -64,14 +64,18 @@ $(document).ready(function(){
                             },
                             success: function(result){
                                 if(result.body.success){
-                                    console.log(result);
+                                    var div = $("<div class='card-panel green'>Product Deleted successfully</div>");
+                                    $(".info").append(div);
+
                                     getProducts();
                                 } else {
-                                    console.log(result);
+                                    var div = $("<div class='card-panel red'>Error in Deleting the Product</div>");
+                                    $(".info").append(div);
                                 }
                             },
                             error: function(err){
-                                console.log("Can't make the ajax request");
+                                var div = $("<div class='card-panel red'>Either the Server is Down or Your Internet</div>");
+                                $(".info").append(div);
                             }
                         })
                     });

@@ -8,18 +8,21 @@
 
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <link rel="stylesheet" href="/css/admin/delete.css">
       <%- include partials/loadercss %>
     </head>
 
     <body>
         
         <%- include partials/loader %>
-        <div class="main">
-          <h3>delete users</h3>
+        <div class="main container">
+          <h3 class="center-align">Delete User</h3>
           <div class="row">
             <form class="col s12" id="userDelete" style="display: none">
             </form>
           </div>
+
+          <div class="info"></div>
         </div>  
         <%- include partials/errors %>      
 

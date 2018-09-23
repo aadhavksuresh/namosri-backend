@@ -8,19 +8,31 @@
 
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <link rel="stylesheet" href="/css/admin/signup.css">
       <%- include partials/loadercss %>
     </head>
 
     <body>
         <%- include partials/loader %>
-        <div class="main">
-          <h3>invalid</h3>
+        <div class="main container">
+          <h3 class="center-align">Add New User</h3>
           <form id="signupForm">
-              <input type="text" id="username" placeholder="username">
-              <input type="password" id="password" placeholder="password">
-              <input type="password" id="verifyPassword" placeholder="enter password again"/>
-              <input type="submit" value="SignUp">
+            <div class="input-field">
+              <input type="text" id="username">
+              <label for="username">Username</label>
+            </div>
+            <div class="input-field">
+              <input type="password" id="password">
+              <label for="password">Password</label>
+            </div>
+            <div class="input-field">
+              <input type="password" id="verifyPassword"/>
+              <label for="verifyPassword">Verify Password</label>
+            </div>
+            <input class="waves-effect waves-light btn" type="submit" value="SignUp">
           </form>
+
+          <div class="info"></div>
         </div>
 
         <%- include partials/errors %>
