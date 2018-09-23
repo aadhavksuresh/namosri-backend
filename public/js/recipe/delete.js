@@ -79,7 +79,7 @@ $(document).ready(function(){
                                 var div = $("<div class='card-panel red'>Either the Server is Down or Your Internet</div>");
                                 $(".info").append(div);
                             }
-                        })
+                        });
                     });
 
                 } else {
