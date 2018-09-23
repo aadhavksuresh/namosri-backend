@@ -6,8 +6,8 @@ let response = require('../models/response');
 let responseCodes = require('../models/responseCodes');
 let tokenizer = require("../services/tokenizer");
 
-router.get('/products', (req, res) => {
-    res.render('product/update');
+router.get('/product/:id', (req, res) => {
+    res.render('product/update' , {pid : req.params.id});
 });
 
 router.get('/recipe', (req, res) => {
@@ -16,6 +16,7 @@ router.get('/recipe', (req, res) => {
 
 router.post('/products', (req, res) => {
     let params = req.body;
+    console.log(params);
     tokenizer.varifyUser(params.token).then(user => {
         params.userId = user.data.id;
 

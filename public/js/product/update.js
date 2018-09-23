@@ -8,9 +8,36 @@ $(document).ready(function(){
             },
             success: function(result){
                 if(result.body.success){
-                    $('.loader').css("display", "none");
-                    $('.main').css("display", "block");
-                    $('.errors').css("display", "none");
+                    function getProducts(){
+                       $.ajax({
+                            url: "/get/one/product",
+                            method: "POST",
+                            data: {
+                                productId :  $("#pid").html() 
+                            },
+                            success: function(result){
+                                if(result.body.success){
+                                    product = result.body.result;
+                                    
+                                    $("#oldName").attr("value" , product.name);
+                                    // $("#newName").attr("value" , product.name);
+                                    $("#newDescription").text(product.description);
+                                    $("#newPosition").attr("value" , product.position);
+
+                                     M.textareaAutoResize($("#newDescription"))
+                                     M.updateTextFields();
+                                    $('.loader').css("display", "none");
+                                    $('.main').css("display", "block");
+                                    $('.errors').css("display", "none");
+                                }
+                            },
+                            error: function(err){
+                                console.log("error can't make the request");
+                            }
+                        });  
+                    }
+                
+                    getProducts();
 
                     $('#productUpdate').submit(function(e){
                         e.preventDefault();

@@ -14,11 +14,10 @@
     </head>
 
     <body>
-      
         <%- include partials/loader %>
-
-        <div class="main container">
-            <h3 class="center-align">Dashboard</h3>
+        <div class="row" >
+          <h3 class="center-align">Dashboard</h3>
+          <div class=' row col s3 m3'>
             <ul class="collapsible popout">
               <li>
                 <div class="collapsible-header">Manipulate User</div>
@@ -45,8 +44,22 @@
                 </div>
               </li>
             </ul>
+          </div>
+        <div class="row col s9" id="products-row">
         </div>
-        
+        </div>
+        <!-- <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a> -->
+
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4 class="black-text">Modal Header</h4>
+      <p class="black-text">Are You Sure !!!</p>
+    </div>
+    <div class="modal-footer">
+      <a href="#" class="modal-close waves-effect waves-green btn-flat agree-btn" >Agree</a>
+    </div>
+  </div>
         <%- include partials/errors %>
 
       <!--JavaScript at end of body for optimized loading-->
