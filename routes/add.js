@@ -12,8 +12,16 @@ router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
+router.get('/products', (req, res) => {
+    res.render("product/add");
+});
+
 router.get('/recipe', function(req, res, next) {
   res.render('recipe/add');  
+});
+
+router.get('/instruction', (req, res) => {
+  res.render('instruction/add');
 });
 
 router.post('/recipe', function(req, res) {
@@ -49,10 +57,6 @@ router.post('/recipe', function(req, res) {
   });
 });
 
-router.get('/products', (req, res) => {
-    res.render("product/add");
-});
-
 router.post('/products', (req, res) => {
     let params = req.body;
 
@@ -81,12 +85,12 @@ router.post('/products', (req, res) => {
     });
 });
 
-router.post('/instructions', (req, res) => {
+router.post('/instruction', (req, res) => {
     let params = req.body;
     tokenizer.varifyUser(params.token).then(user => {
-        params.data.userId = user.data.id;
-        console.log(params.data);
-        instructionService.addInstruction(params.data).then(instruction => {
+        params.userId = user.data.id;
+        console.log(params);
+        instructionService.addInstruction(params).then(instruction => {
             response.header.code = responseCodes.ok;
             response.body = {};
             response.body.success = true;

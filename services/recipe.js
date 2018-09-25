@@ -83,7 +83,7 @@ module.exports = {
             }
         });
     },
-    getAllRecipe: function(params){
+    getAllRecipe: function(){
         return new Promise((resolve, reject) => {
             models.recipe.findAll({
                 where: {

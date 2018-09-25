@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="/libs/materialize.min.css"  media="screen,projection"/>
+
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <title>Add Recipe</title>
+      <link rel="stylesheet" href="/css/recipe/add.css">
+      <%- include partials/loadercss %>
+    </head>
+
+    <body>
+      
+        <%- include partials/loader %>
+
+        <div class="main container">
+            <h3 class="center-align">Add Instruction</h3>
+            <form id="instructionForm">
+                <div class="input-field">
+                  <textarea id="description" class="materialize-textarea"></textarea>
+                  <label for="description">Description</label>
+                </div>
+                <div class="selectField"></div>
+                <input class="waves-effect waves-light btn" type="submit" value="Add Instruction">
+            </form>
+
+            <div class="info"></div>
+        </div>
+
+        <%- include partials/errors %>
+
+      <!--JavaScript at end of body for optimized loading-->
+      <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+      <script type="text/javascript" src="/js/libs/materialize.min.js"></script>
+      <script src="/js/instruction/add.js"></script>
+    </body>
+  </html>
+

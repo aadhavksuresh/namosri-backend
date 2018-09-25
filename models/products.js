@@ -15,7 +15,7 @@ let Products = connection.sequelize.define('products', {
         unique: true
     },
     description: {
-        type: connection.Sequelize.STRING,
+        type: connection.Sequelize.TEXT,
         allowNull: true
     },
     productImage: {
