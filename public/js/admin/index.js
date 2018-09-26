@@ -29,12 +29,6 @@ $(document).ready(function() {
                         deleteInstruction($(".instructionId").text());
                     });
 
-                    M.toast({
-                        html: "Logged In",
-                        completeCallback: function() {
-                            M.toast({ html: "Welcome " + result.body.result });
-                        }
-                    });
                     $(".clickMe").click(function(e) {
                         window.location.href = $(e.target).attr("data-url");
                     });
@@ -96,14 +90,8 @@ $(document).ready(function() {
                             }
                         });
                     }
-
-<<<<<<< HEAD
-                    console.log(result.body.result);
                     M.toast({ html: "Welcome " + result.body.result });
-                    $(".clickMe").click(function(e) {
-                        window.location.href = $(e.target).attr("data-url");
-                    });
-=======
+                    
                     function deleteInstruction(instructionId){
                         $.ajax({
                             url: "/delete/instruction",
@@ -127,7 +115,7 @@ $(document).ready(function() {
                             }
                         });
                     }
->>>>>>> bfd5e0202d8885acd0617869d14e43280a32f0fd
+
 
                     var productObj = {};
                     function getProducts() {

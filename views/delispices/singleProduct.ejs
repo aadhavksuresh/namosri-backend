@@ -30,8 +30,59 @@
 <!-- Main Stylesheet File -->
   <!-- Main Stylesheet File -->
   <link href="../css/style-product.css" rel="stylesheet">
+
+ <style>
+      .loader{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: #411717;
+        z-index: 1000;
+      }
+
+      .hourGlass {
+        display: inline-block;
+        position: absolute;
+        width: 150px;
+        height: 150px;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      .hourGlass:after {
+        content: " ";
+        display: block;
+        border-radius: 50%;
+        width: 0;
+        height: 0;
+        margin: 5px;
+        box-sizing: border-box;
+        border: 70px solid #fff;
+        border-color: #fff transparent #fff transparent;
+        animation: lds-hourglass 1.2s infinite;
+      }
+
+      @keyframes lds-hourglass {
+        0% {
+          transform: rotate(0);
+          animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+        }
+        50% {
+          transform: rotate(900deg);
+          animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+        }
+        100% {
+          transform: rotate(1800deg);
+        }
+      }
+
+    </style>
 </head>
 <body>
+  <div class="loader">
+      <div class="hourGlass"></div>
+    </div>
 
   <!--____________________________NAV_____________________________ -->
   <% include includes/header.ejs %>
@@ -107,170 +158,12 @@
                    </form>
               </div>
             </div>
+
+
           <div class="row">
-          <div class="col-lg-12">
+          <div class="col-lg-12 instructions">
               
-          <h3>Biriani Gravy Recipie: </h3>
-          <br>
-          <h5> Cooking instructions for Hyderabadi Chicken Biryani </h5>
-          <ul>
-            <li>
-                  Mix 3Kg chicken pieces with 1 kg Hyderabadi Biryani Gravy and 1kg yogurt. Keep aside for 45 minutes.
-            </li>
-
-            <li>
-                  Heat 100gms ghee in a pan and add contents of the spice pack (supplied separately with this pack of gravy).Add marinated chicken pieces and 2.5 Kg water.
-            </li>
-
-            <li>
-                    Cook for 10 to 15 minutes on medium heat till tender and gravy thickens.
-            </li>
-
-            <li>
-                    Cook 1250gm basmati rice in water separately.
-            </li>
-
-            <li>
-                    Take cooked Rice qty 2500 Gms and make layers of Rice and cooked chicken. 
-                 
-            </li>
-
-            <li>
-                 
-                    Pour saffron and milk mix and pure ghee 20 Gms.
-                 
-            </li>
-
-            <li>
-                 
-                    Give Dum to the Biryani. 
-                 
-            </li>
-
-            <li>
-                 
-                    Garnish with Fresh chopped coriander and Fried onions.
-                 
-            </li>
-
-          </ul>
-
-          <h5> Cooking instructions for Hyderabadi Mutton Biryani</h5>
-          <ul>
-            <li>
-               
-                  Mix 3Kg mutton pieces with 1 kg Hyderabadi Biryani Gravy and 1kg yogurt. Keep aside for 45 minutes.
-               
-            </li>
-
-            <li>
-                 
-                    Heat 100gms ghee in a pan and add contents of the spice pack (supplied separately with this pack of gravy).Add marinated mutton pieces and 2.5 Kg water.
-                 
-            </li>
-
-            <li>
-                 
-                    Cook for 10 to 15 minutes on medium heat till tender and gravy thickens.
-                 
-            </li>
-
-            <li>
-                 
-                    Cook 1250gm basmati rice in water separately.
-                 
-            </li>
-
-            <li>
-                 
-                    Take cooked Rice qty 2500 Gms and make layers of Rice and cooked mutton.
-                 
-            </li>
-
-            <li>
-                 
-                    Pour saffron and milk mix and pure ghee 20 Gms.
-                 
-            </li>
-
-            <li>
-                 
-                    Give Dum to the Biryani. 
-                 
-            </li>
-
-            <li>
-                 
-                    Garnish with Fresh chopped coriander and Fried onions.
-                 
-            </li>
-
-          </ul>
-
-
-          
-          <h5>  Cooking instructions for Vegetable Hyderabadi Biryani</h5>
-          <ul>
-            <li>
-               
-                  Heat 80gms ghee in a pan and add contents of the spice pack (supplied separately with this pack of gravy).
-               
-            </li>
-
-            <li>
-                 
-                  Add to this 2500g chopped mixed vegetables (such as French beans, carrots, cauliflower, potatoes and green peas), entire content of 1 kg Hyderabadi Biryani Gravy  and 2500 kg water.
-                 
-            </li>
-
-            <li>
-                 
-                    Cook for 10 to 15 minutes on medium heat .
-                 
-            </li>
-
-            <li>
-                 
-                    Add 400Gms yoghurt and simmer for another 2 minutes on medium heat.
-                 
-            </li>
-
-            <li>
-                 
-                    Add some chopped coriander and mint leaves.
-                 
-            </li>
-
-            <li>
-                 
-                    Cook 1250gm basmati rice in water separately.Take cooked Rice qty 2500 Gms and make layers of Rice and cooked vegetables.
-                 
-            </li>
-
-            <li>
-                 
-                    Give Dum to the Biryani. 
-                 
-            </li>
-
-            <li>
-                 
-                    Pour saffron and milk mix and pure ghee 20 Gms.
-                 
-            </li>
-
-            <li>
-                 
-                    Give Dum to the Biryani. 
-                 
-            </li>
-
-            <li>
-                 
-                    Garnish with Fresh chopped coriander and Fried onions.
-                 
-            </li>
-          </ul>
+           <h3></h3>
         
         </div>
       </div>

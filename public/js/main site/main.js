@@ -1,13 +1,3 @@
-$(window).load(function(){
-  console.log("wow");
-  $(".loader").css("display", 'none');
-  $("#intro").css("display", 'block');
-  $("#main").css("display", 'block');
-  $("#footer").css("display", 'block');
-  $(".back-to-top").css("display", 'block');
-  $('header').css("display", "block");
-});
-
 jQuery(document).ready(function( $ ) {
 
   // Back to top button
