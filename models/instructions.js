@@ -14,7 +14,7 @@ let Instruction = connection.sequelize.define('instructions', {
         allowNull: false
     },
     description: {
-        type: connection.Sequelize.STRING,
+        type: connection.Sequelize.TEXT,
         allowNull: false
     }
 });
