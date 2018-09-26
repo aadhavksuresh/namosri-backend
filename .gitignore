@@ -63,4 +63,4 @@ typings/
 # vs-code-workspace-setting
 .vscode
 
-./config
+config/
