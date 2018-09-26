@@ -60,13 +60,14 @@ router.post('/recipe', (req, res) => {
     });
 });
 
-router.post('/instructions', (req, res) => {
+router.post('/instruction', (req, res) => {
     let params = req.body;
     tokenizer.varifyUser(params.token).then(user => {
-        instructionServices.deleteInstructions(params.data).then(insturction => {
+        instructionServices.deleteInstructions(params).then(insturction => {
             response.header.code = responseCodes.ok;
             response.body = {};
             response.body.success = true;
+            response.body.result = insturction;
             res.json(response);
         }).catch(err => {
             response.header.code = err;

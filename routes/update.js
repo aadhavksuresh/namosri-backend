@@ -14,6 +14,11 @@ router.get("/recipe/:id", (req, res) => {
     res.render("recipe/update", { rid: req.params.id });
 });
 
+router.get("/instruction/:id", (req, res) => {
+    console.log("wow");
+    res.render("instruction/update", {iid: req.params.id});
+});
+
 router.post("/products", (req, res) => {
     let params = req.body;
     console.log(params);
@@ -75,16 +80,16 @@ router.post("/recipe", (req, res) => {
         });
 });
 
-router.post("/instructions", (req, res) => {
+router.post("/instruction", (req, res) => {
     let params = req.body;
     tokenizer
         .varifyUser(params.token)
         .then(user => {
-            params.data.newValues.userId = user.data.id;
-            console.log(params.data.newValues);
-            console.log(params.data.oldValue);
+            // // params.data.newValues.userId = user.data.id;
+            // console.log(params.data.newValues);
+            // console.log(params.data.oldValue);
             instructionServices
-                .updateInstructions(params.data.oldValue, params.data.newValues)
+                .updateInstructions(params)
                 .then(instruction => {
                     response.header.code = responseCodes.ok;
                     response.body = {};

@@ -7,7 +7,11 @@ module.exports = {
             if(!params.description || !params.productId || !params.userId){
                 reject(responseCodes.invalidRequest);
             } else {
-                models.instructions.create(params).then(instruction => {
+                models.instructions.create({
+                    description: params.description,
+                    productId: params.productId,
+                    userId: params.userId
+                }).then(instruction => {
                     resolve(instruction.dataValues);
                 }).catch(err => {
                     reject(responseCodes.internalError);
@@ -21,7 +25,9 @@ module.exports = {
                 reject(responseCodes.invalidRequest);
             } else {
                 models.instructions.destroy({
-                    where: params
+                    where: {
+                        id: params.id
+                    }
                 }).then(() => {
                     resolve(responseCodes.ok);
                 }).catch(err => {
@@ -30,18 +36,22 @@ module.exports = {
             }
         });
     },
-    updateInstructions: function(oldValue, newValues){
+    updateInstructions: function(params){
         return new Promise((resolve, reject) => {
-            if(!oldValue.id){
+            if(!params.id){
                 reject(responseCodes.invalidRequest);
             } else {
                 models.instructions.findOne({
-                    where: oldValue
+                    where: {
+                        id: params.id
+                    }
                 }).then(instruction => {
                     if(!instruction){
                         reject(responseCodes.noInstructionExists);
                     } else {
-                        instruction.updateAttributes(newValues).then(instruction => {
+                        instruction.updateAttributes({
+                            description: params.newDescription
+                        }).then(instruction => {
                             resolve(instruction);
                         }).catch(err => {
                             reject(responseCodes.internalError);
@@ -53,6 +63,29 @@ module.exports = {
             }
         });
     },
+
+    getAllInstruction: function(){
+        return new Promise((resolve, reject) => {
+            models.instructions.findAll().then(instructions => {
+                resolve(instructions);
+            }).catch(err => {
+                reject(err);
+            });
+        });
+    },
+    getOneInstruction: function(iid){
+        return new Promise((resolve, reject) => {
+            models.instructions.findOne({
+                where: {
+                    id: iid
+                }
+            }).then(instruction => {
+                resolve(instruction);
+            }).catch(err => {
+                reject(responseCodes.internalError);
+            })
+        });
+    }  ,
     getInstructionByPid: function (productId) {
          return new Promise((resolve, reject) => {
             if(!productId){
@@ -76,4 +109,5 @@ module.exports = {
             }
         });   
     }
+
 };

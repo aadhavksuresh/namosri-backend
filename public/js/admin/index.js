@@ -12,12 +12,25 @@ $(document).ready(function() {
             success: function(result) {
                 if (result.body.success) {
                     $(".agree-btn").on("click", function() {
-                        console.log("nk");
-                        deleteProduct($(".modal-content > h4").html());
+                        deleteProduct($(".product-content > h4").html());
                     });
 
                     $(".recipe-agree-btn").click(function(){
-                        deleteRecipe($(".modal-content > h4").html());
+                        deleteRecipe($(".recipe-content > h4").html());
+                    });
+
+                    $(".instruction-agree-btn").click(function(){
+                        deleteInstruction($(".instructionId").text());
+                    });
+
+                    M.toast({
+                        html: "Logged In",
+                        completeCallback: function() {
+                            M.toast({ html: "Welcome " + result.body.result });
+                        }
+                    });
+                    $(".clickMe").click(function(e) {
+                        window.location.href = $(e.target).attr("data-url");
                     });
 
                     function deleteProduct(productName) {
@@ -78,17 +91,31 @@ $(document).ready(function() {
                         });
                     }
 
-                    console.log(result.body.result);
-                    M.toast({
-                        html: "Logged In",
-                        completeCallback: function() {
-                            M.toast({ html: "Welcome " + result.body.result });
-                        }
-                    });
-                    $(".clickMe").click(function(e) {
-                        window.location.href = $(e.target).attr("data-url");
-                    });
+                    function deleteInstruction(instructionId){
+                        $.ajax({
+                            url: "/delete/instruction",
+                            method: "POST",
+                            data: {
+                                token: window.localStorage.getItem("authToken"),
+                                id: instructionId
+                            },
+                            success: function(result){
+                                if(result.body.success){
+                                    $("#instructions-row").html("");
+                                    getInstructions();
+                                } else {
+                                    var div = $("<div class='card-panel red'>Error in Deleting the Recipe</div>");
+                                    $(".info").append(div);
+                                }
+                            },
+                            error: function(err){
+                                var div = $("<div class='card-panel red'>Either the Server is Down or Your Internet</div>");
+                                $(".info").append(div);
+                            }
+                        });
+                    }
 
+                    var productObj = {};
                     function getProducts() {
                         $.ajax({
                             url: "/get/all/products",
@@ -100,7 +127,14 @@ $(document).ready(function() {
                                     $(".errors").css("display", "none");
                                     var products = result.body.result;
 
+                                    if(products.length > 0){
+                                        $("#products-row").append("<h3>Products</h3>");
+                                    }
+
                                     products.forEach(product => {
+                                        
+                                        productObj[product.productId] = product.name;
+
                                         $("#products-row").append(
                                             "<div class='col s12 m4'><div class='card blue-grey darken-1'><div class='card-content white-text'> <span class='card-title'>" +
                                                 product.name +
@@ -109,17 +143,17 @@ $(document).ready(function() {
                                                     0,
                                                     20
                                                 ) +
-                                                "</p></div> <div class='card-action'><a href='#' id='" +
+                                                "</p></div> <div class='card-action'><a href='#' id='product" +
                                                 product.productId +
-                                                "anc'>Delete</a><a href='../update/product/" +
+                                                "'>Delete</a><a href='../update/product/" +
                                                 product.productId +
                                                 "'>Update</a></div></div></div>"
                                         );
 
-                                        $("#" + product.productId + "anc").on(
+                                        $("#product" + product.productId).on(
                                             "click",
                                             function() {
-                                                $(".modal-content > h4").html(
+                                                $(".product-content > h4").html(
                                                     product.name
                                                 );
                                                 // $(".agree-btn").attr("id" , product.productId +"agree");
@@ -152,6 +186,10 @@ $(document).ready(function() {
                                     $(".errors").css("display", "none");
                                     var recipes = result.body.result;
 
+                                    if(recipes.length > 0){
+                                        $("#recipes-row").append("<h3>Recipes</h3>");
+                                    }
+
                                     recipes.forEach(recipe => {
                                         $("#recipes-row").append(
                                             "<div class='col s12 m4'><div class='card blue-grey darken-1'><div class='card-content white-text'> <span class='card-title'>" +
@@ -161,17 +199,17 @@ $(document).ready(function() {
                                                     0,
                                                     20
                                                 ) +
-                                                "</p></div> <div class='card-action'><a href='#' id='" +
+                                                "</p></div> <div class='card-action'><a href='#' id='recipe" +
                                                 recipe.id +
-                                                "anc'>Delete</a><a href='../update/recipe/" +
+                                                "'>Delete</a><a href='../update/recipe/" +
                                                 recipe.id +
                                                 "'>Update</a></div></div></div>"
                                         );
 
-                                        $("#" + recipe.id + "anc").on(
+                                        $("#recipe" + recipe.id).on(
                                             "click",
                                             function() {
-                                                $(".modal-content > h4").html(
+                                                $(".recipe-content > h4").html(
                                                     recipe.name
                                                 );
                                                 // $(".agree-btn").attr("id" , product.productId +"agree");
@@ -192,6 +230,61 @@ $(document).ready(function() {
                         });
                     }
                     getRecipes();
+
+                    function getInstructions() {
+                        $.ajax({
+                            url: "/get/all/instruction",
+                            method: "POST",
+                            success: function(result) {
+                                if (result.body.success) {
+                                    $(".loader").css("display", "none");
+                                    $(".main").css("display", "block");
+                                    $(".errors").css("display", "none");
+                                    var instructions = result.body.result;
+
+                                    if(instructions.length > 0){
+                                        $("#instructions-row").append("<h3>Instructions</h3>");
+                                    }
+
+                                    instructions.forEach(instruction => {
+                                        $("#instructions-row").append(
+                                            "<div class='col s12 m4'><div class='card blue-grey darken-1'><div class='card-content white-text'> <span class='card-title'>" +
+                                                productObj[instruction.productId] +
+                                                "</span><p>" +
+                                                instruction.description.substr(
+                                                    0,
+                                                    20
+                                                ) +
+                                                "</p></div> <div class='card-action'><a href='#' id='instruction" +
+                                                instruction.id +
+                                                "'>Delete</a><a href='../update/instruction/" +
+                                                instruction.id +
+                                                "'>Update</a></div></div></div>"
+                                        );
+
+                                        $("#instruction" + instruction.id).on(
+                                            "click",
+                                            function() {
+                                                $(".instruction-content > h4").html(
+                                                    productObj[instruction.productId]
+                                                );
+                                                $(".instructionId").text(instruction.id);
+                                                
+                                                $("#modal3").modal().modal("open");
+                                            }
+                                        );
+                                    });
+                                } else {
+                                    console.log("incorrect");
+                                }
+                            },
+                            error: function(err) {
+                                console.log("error can't make the request");
+                            }
+                        });
+                    }
+                    getInstructions();
+
                 } else {
                     window.localStorage.removeItem("authToken");
                     $(".loader").css("display", "none");
