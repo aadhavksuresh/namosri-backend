@@ -3,6 +3,12 @@ $(document).ready(function() {
 
     // let modal=new M.Modal($("#modal1"));
     if (window.localStorage.getItem("authToken")) {
+        $("#logout").on("click" , function () {
+            window.localStorage.removeItem("authToken");
+            window.location = "/user/login";
+        });
+
+
         $.ajax({
             url: "/user/verifier",
             method: "POST",
@@ -79,12 +85,7 @@ $(document).ready(function() {
                     }
 
                     console.log(result.body.result);
-                    M.toast({
-                        html: "Logged In",
-                        completeCallback: function() {
-                            M.toast({ html: "Welcome " + result.body.result });
-                        }
-                    });
+                    M.toast({ html: "Welcome " + result.body.result });
                     $(".clickMe").click(function(e) {
                         window.location.href = $(e.target).attr("data-url");
                     });
