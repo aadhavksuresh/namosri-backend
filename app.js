@@ -14,6 +14,7 @@ var deleteRequests = require('./routes/delete');
 var updateRequests = require('./routes/update');
 var getRequest = require('./routes/get');
 var uploadRequest = require('./routes/upload');
+var requestForProduct = require('./routes/requestForProduct');
 
 var app = express();
 
@@ -41,6 +42,8 @@ app.use('/delete', deleteRequests);
 app.use('/update', updateRequests);
 app.use('/get' , getRequest);
 app.use('/upload' , uploadRequest);
+app.use('/request' , requestForProduct);
+
 
 
 // catch 404 and forward to error handler

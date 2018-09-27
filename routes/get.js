@@ -5,6 +5,7 @@ var responseCodes = require("../models/responseCodes");
 var recipeService = require("../services/recipe");
 var productService = require("../services/products");
 var instructionService = require("../services/instructions");
+var requestProductService = require("../services/requestForProduct");
 
 /* GET add listing. */
 router.post("/all/products", function(req, res) {
@@ -44,7 +45,6 @@ router.post("/all/recipe", (req, res) => {
 });
 
 router.post("/all/instruction", (req, res) => {
-    console.log("wow");
     instructionService.getAllInstruction().then(instructions => {
         response.header.code = responseCodes.ok;
         response.body = {};
@@ -117,6 +117,24 @@ router.post("/one/instruction", (req, res) => {
         });
 });
 
+router.post("/all/requests", (req, res) => {
+    // console.log(req.body.productId);
+    requestProductService
+        .getAllRequestsForProduct()
+        .then(request => {
+            response.header.code = responseCodes.ok;
+            response.body = {};
+            response.body.success = true;
+            response.body.result = request;
+            res.json(response);
+        })
+        .catch(err => {
+            response.header.code = err;
+            response.body = {};
+            response.body.success = false;
+            res.json(response);
+        });
+});
 
 // router.post("/one/instructions", (req, res) => {
 //     instructionService.getOneInstruction(req.body.id).then(instruction => {
@@ -134,5 +152,8 @@ router.post("/one/instruction", (req, res) => {
 //         res.json(response);
 //     });
 // });
+
+
+
 
 module.exports = router;

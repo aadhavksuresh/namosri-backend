@@ -1,5 +1,7 @@
 $(document).ready(function() {
     $(".collapsible").collapsible();
+    // $(".collapsible").css("position" , "fixed");
+
 
     // let modal=new M.Modal($("#modal1"));
     if (window.localStorage.getItem("authToken")) {
@@ -286,6 +288,46 @@ $(document).ready(function() {
                         });
                     }
                     getInstructions();
+                    function getRequests() {
+                        $.ajax({
+                            url: "/get/all/requests",
+                            method: "POST",
+                            success: function(result) {
+                                if (result.body.success) {
+                                    $(".loader").css("display", "none");
+                                    $(".main").css("display", "block");
+                                    $(".errors").css("display", "none");
+                                    var requests = result.body.result;
+
+                                    if(requests.length > 0){
+                                        $("#request-row").append("<h3>Requests</h3>");
+                                    }
+
+                                    requests.forEach(request => {
+                                        $("#request-row").append(
+                                            "<div class='col s12 m4'><div class='card blue-grey darken-1'><div class='card-content white-text'> <span class='card-title'>" +
+                                                productObj[request.productId] +
+                                                "</span><h5>"+request.name +"\n" + request.mobile+"<h5><p>" +
+                                                request.address.substr(
+                                                    0,
+                                                    20
+                                                ) +
+                                                "</p></div> <div class='card-action'><a href='/request/seerve/"+request.id+"' id='request" +
+                                                request.id +
+                                                "'>Send</a></div></div></div>"
+                                        );
+                                    });
+                                } else {
+                                    console.log("incorrect");
+                                }
+                            },
+                            error: function(err) {
+                                console.log("error can't make the request");
+                            }
+                        });
+                    }
+                    getRequests()
+                   
 
                 } else {
                     window.localStorage.removeItem("authToken");
