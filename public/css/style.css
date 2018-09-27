@@ -652,10 +652,10 @@ body.mobile-nav-active #mobile-nav-toggle {
   color:black;
 }
 
-#aboutcontainer img{
-  /* padding: 0% 0% 0% 15%; */
-  /* margin: auto; */
-}
+/* #aboutcontainer img{
+  padding: 0% 0% 0% 15%;
+  margin: auto;
+} */
 
 #about {
   background: url("../images/about-bg.jpg") center top no-repeat fixed;
