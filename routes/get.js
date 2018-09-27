@@ -42,6 +42,22 @@ router.post("/all/recipe", (req, res) => {
             res.json(response);
         });
 });
+router.post("/one/instruction", (req, res) => {
+    instructionService
+        .getInstructionByPid(req.body.productId)
+        .then(instruction => {response.header.code = responseCodes.ok;
+            response.body = {};
+            response.body.success = true;
+            response.body.result = instruction;
+            res.json(response);
+        })
+        .catch(err => {
+            response.header.code = err;
+            response.body = {};
+            response.body.success = false;
+            res.json(response);
+        });
+});
 
 router.post("/all/instruction", (req, res) => {
     console.log("wow");

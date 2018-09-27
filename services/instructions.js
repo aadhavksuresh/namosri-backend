@@ -63,6 +63,7 @@ module.exports = {
             }
         });
     },
+
     getAllInstruction: function(){
         return new Promise((resolve, reject) => {
             models.instructions.findAll().then(instructions => {
@@ -84,5 +85,29 @@ module.exports = {
                 reject(responseCodes.internalError);
             })
         });
-    }   
+    }  ,
+    getInstructionByPid: function (productId) {
+         return new Promise((resolve, reject) => {
+            if(!productId){
+                reject(responseCodes.invalidRequest);
+            } else {
+                models.instructions.findAll({
+                    where: {productId : productId}
+                }).then(instruction => {
+                    if(!instruction){
+                        reject(responseCodes.noInstructionExists);
+                    } else {
+                        instruction.updateAttributes(newValues).then(instruction => {
+                            resolve(instruction);
+                        }).catch(err => {
+                            reject(responseCodes.internalError);
+                        });
+                    }
+                }).catch(err => {
+                    reject(responseCodes.internalError);
+                });
+            }
+        });   
+    }
+
 };
