@@ -42,22 +42,6 @@ router.post("/all/recipe", (req, res) => {
             res.json(response);
         });
 });
-router.post("/one/instruction", (req, res) => {
-    instructionService
-        .getInstructionByPid(req.body.productId)
-        .then(instruction => {response.header.code = responseCodes.ok;
-            response.body = {};
-            response.body.success = true;
-            response.body.result = instruction;
-            res.json(response);
-        })
-        .catch(err => {
-            response.header.code = err;
-            response.body = {};
-            response.body.success = false;
-            res.json(response);
-        });
-});
 
 router.post("/all/instruction", (req, res) => {
     console.log("wow");
@@ -80,7 +64,7 @@ router.post("/one/product", function(req, res, next) {
     productService
         .getOneProducts(req.body.productId.trim())
         .then(products => {
-            console.log(products);
+            // console.log(products);
             response.header.code = responseCodes.ok;
             response.body = {};
             response.body.success = true;
@@ -115,20 +99,40 @@ router.post("/one/recipe", (req, res) => {
 });
 
 router.post("/one/instruction", (req, res) => {
-    instructionService.getOneInstruction(req.body.id).then(instruction => {
-        console.log(instruction);
-        response.header.code = responseCodes.ok;
-        response.body = {};
-        response.body.success = true;
-        response.body.result = instruction;
-        res.json(response);
-    })
-    .catch(err => {
-        response.header.code = err;
-        response.body = {};
-        response.body.success = false;
-        res.json(response);
-    });
+    // console.log(req.body.productId);
+    instructionService
+        .getInstructionByPid(req.body.productId)
+        .then(instruction => {
+            response.header.code = responseCodes.ok;
+            response.body = {};
+            response.body.success = true;
+            response.body.result = instruction;
+            res.json(response);
+        })
+        .catch(err => {
+            response.header.code = err;
+            response.body = {};
+            response.body.success = false;
+            res.json(response);
+        });
 });
+
+
+// router.post("/one/instructions", (req, res) => {
+//     instructionService.getOneInstruction(req.body.id).then(instruction => {
+//         console.log(instruction);
+//         response.header.code = responseCodes.ok;
+//         response.body = {};
+//         response.body.success = true;
+//         response.body.result = instruction;
+//         res.json(response);
+//     })
+//     .catch(err => {
+//         response.header.code = err;
+//         response.body = {};
+//         response.body.success = false;
+//         res.json(response);
+//     });
+// });
 
 module.exports = router;
