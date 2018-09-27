@@ -583,7 +583,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 
 #moreinfo{
-  padding-left: 38%;
+  text-align: center;
 }
 
 
@@ -653,7 +653,8 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 #aboutcontainer img{
-  padding: 0% 0% 0% 30%;
+  /* padding: 0% 0% 0% 15%; */
+  /* margin: auto; */
 }
 
 #about {
@@ -779,11 +780,8 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 #services .title {
-  margin-left: 60px;
   font-weight: 700;
-  margin-bottom: 15px;
-  font-size: 18px;
-  padding-left: 20%
+  text-align: center;
 }
 
 #services .title a {
@@ -1485,4 +1483,13 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 #showcase{
   padding-left: 40%;
+}
+
+@media screen and (max-width: 720px){
+  #aboutcontainer img{
+    padding: 0% 0% 0% 0%;
+    position: relative;
+    width: 100%;
+    height: auto;
+  }
 }
