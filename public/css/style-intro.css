@@ -733,16 +733,16 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 #services .title {
-  margin-left: 60px;
+  /* margin-left: 60px; */
   font-weight: 700;
-  margin-bottom: 15px;
-  font-size: 18px;
-  padding-left: 20%
+  /* margin-bottom: 15px; */
+  /* font-size: 18px; */
+  /* padding-left: 20% */
 }
 
 
 #moreinfo{
-  padding-left: 38%;
+  /* padding-left: 38%; */
 }
 
 #tryF{
