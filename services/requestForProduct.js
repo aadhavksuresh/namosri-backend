@@ -24,9 +24,18 @@ module.exports = {
     },
     getAllRequestsForProduct :  function(){
         return new Promise((resolve, reject) => {
-            models.requestProduct.findAll({
+            models.requestProduct.findAll().then(request => {
+                resolve(request)
+            }).catch(err => {
+                reject(responseCodes.internalError);
+            })
+        });
+    },
+    getRequestsForProductById :  function(rid){
+        return new Promise((resolve, reject) => {
+            models.requestProduct.findOne({
                 where: {
-                    served: false
+                    id : rid
                 }
             }).then(request => {
                 resolve(request)
@@ -34,5 +43,27 @@ module.exports = {
                 reject(responseCodes.internalError);
             })
         });
-    }
+    },
+    sendRequestProduct: function (rid) {
+       return new Promise((resolve, reject) => {
+        models.requestProduct.findOne({
+            where: {
+                id: rid
+            }
+        }).then(request => {
+            if(!request){
+                reject(responseCodes.noProductExists);
+            }
+            request.updateAttributes({
+                served : true
+            }).then(request => {
+                resolve(request.dataValues);
+            }).catch(err => {
+                reject(responseCodes.internalError);
+            });
+        }).catch(err => {
+            reject(responseCodes.internalError);
+        });
+    })
+   }
 };

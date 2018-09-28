@@ -6,6 +6,7 @@ var recipeService = require("../services/recipe");
 var productService = require("../services/products");
 var instructionService = require("../services/instructions");
 var requestProductService = require("../services/requestForProduct");
+let tokenizer = require("../services/tokenizer");
 
 /* GET add listing. */
 router.post("/all/products", function(req, res) {
@@ -118,6 +119,31 @@ router.post("/one/instruction", (req, res) => {
 });
 
 router.post("/all/requests", (req, res) => {
+    tokenizer.varifyUser(req.body.token).then(user => {
+        requestProductService
+            .getAllRequestsForProduct()
+            .then(request => {
+                response.header.code = responseCodes.ok;
+                response.body = {};
+                response.body.success = true;
+                response.body.result = request;
+                res.json(response);
+            })
+            .catch(err => {
+                response.header.code = err;
+                response.body = {};
+                response.body.success = false;
+                res.json(response);
+            });
+        }).catch(err => {
+        response.header.code = err;
+        response.body = {};
+        response.body.success = false;
+        res.json(response);
+    });
+});
+
+router.post("/one/request", (req, res) => {
     // console.log(req.body.productId);
     requestProductService
         .getAllRequestsForProduct()

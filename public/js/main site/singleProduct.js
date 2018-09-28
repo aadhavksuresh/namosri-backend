@@ -1,7 +1,7 @@
 $(document).ready(function(){  
    var i = 0;
    $("#requestForm").submit(function(e){ 
-    e.preventDefault();
+        e.preventDefault();
         $.ajax({
         url: "/request/product",
         method: "POST",
@@ -15,6 +15,7 @@ $(document).ready(function(){
         
             if(result.body.success){
                $("#requestBtn").html("Your Request is Received by Us");
+               $("#requestBtn").attr("disabled" , "");
             }
         },
         error: function(err){

@@ -1,6 +1,6 @@
 $(document).ready(function() {
     $(".collapsible").collapsible();
-    // $(".collapsible").css("position" , "fixed");
+    // $(".collapsible").css("position" , "fixedw");
 
 
     // let modal=new M.Modal($("#modal1"));
@@ -147,7 +147,7 @@ $(document).ready(function() {
                                                     0,
                                                     20
                                                 ) +
-                                                "</p></div> <div class='card-action'><a href='#' id='product" +
+                                                "</p></div> <div class='card-action'><a href='javascript:void(0)' id='product" +
                                                 product.productId +
                                                 "'>Delete</a><a href='../update/product/" +
                                                 product.productId +
@@ -203,7 +203,7 @@ $(document).ready(function() {
                                                     0,
                                                     20
                                                 ) +
-                                                "</p></div> <div class='card-action'><a href='#' id='recipe" +
+                                                "</p></div> <div class='card-action'><a href='javascript:void(0)' id='recipe" +
                                                 recipe.id +
                                                 "'>Delete</a><a href='../update/recipe/" +
                                                 recipe.id +
@@ -259,7 +259,7 @@ $(document).ready(function() {
                                                     0,
                                                     20
                                                 ) +
-                                                "</p></div> <div class='card-action'><a href='#' id='instruction" +
+                                                "</p></div> <div class='card-action'><a href='javascript:void(0)' id='instruction" +
                                                 instruction.id +
                                                 "'>Delete</a><a href='../update/instruction/" +
                                                 instruction.id +
@@ -292,6 +292,9 @@ $(document).ready(function() {
                         $.ajax({
                             url: "/get/all/requests",
                             method: "POST",
+                            data: { 
+                                    token: window.localStorage.getItem("authToken")
+                                },
                             success: function(result) {
                                 if (result.body.success) {
                                     $(".loader").css("display", "none");
@@ -307,15 +310,19 @@ $(document).ready(function() {
                                         $("#request-row").append(
                                             "<div class='col s12 m4'><div class='card blue-grey darken-1'><div class='card-content white-text'> <span class='card-title'>" +
                                                 productObj[request.productId] +
-                                                "</span><h5>"+request.name +"\n" + request.mobile+"<h5><p>" +
+                                                "</span><h5>"+request.name.substr(0,10)  +"<br>" + request.mobile+"<h5><p>" +
                                                 request.address.substr(
                                                     0,
                                                     20
                                                 ) +
-                                                "</p></div> <div class='card-action'><a href='/request/seerve/"+request.id+"' id='request" +
+                                                "</p></div> <div class='card-action'><a href='/request/"+request.id+"' id='request" +
                                                 request.id +
                                                 "'>Send</a></div></div></div>"
                                         );
+                                        if(request.served){
+                                            $('#request' + request.id).html("Sent");
+                                            // $('#request' + request.id).css("disabled" , "");
+                                        }
                                     });
                                 } else {
                                     console.log("incorrect");
