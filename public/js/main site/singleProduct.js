@@ -12,10 +12,11 @@ $(document).ready(function(){
             name: $("#tf3").val()
         },
         success: function(result){
-        
             if(result.body.success){
-               $("#requestBtn").html("Your Request is Received by Us");
-               $("#requestBtn").attr("disabled" , "");
+                $(".modal-body").html("Application Submitted Successfully");
+                $('#exampleModal').modal();
+                $("#requestBtn").html("Your Request is Received by Us");
+                $("#requestBtn").attr("disabled" , "");
             }
         },
         error: function(err){
@@ -23,9 +24,6 @@ $(document).ready(function(){
         }
     });  
    });
-
-
-
     $.ajax({
         url: "/get/one/product",
         method: "POST",

@@ -53,11 +53,17 @@ $("document").ready(function(){
                 propose: propose,
             },
             success: function(result){
-                $(".modal-body").html("Distributor Added Successfully");
-                $('#exampleModal').modal();
+                console.log(result);
+                if(result.body.success){
+                    $(".modal-body").html("Application Submitted Successfully");
+                    $('#exampleModal').modal();
+                }else {
+                    $(".modal-body").html("Some Error in Submitting Application");
+                    $('#exampleModal').modal();
+                }
             },
             error: function(err){
-                $(".modal-body").html("Some Error in Adding the Distributor");
+                $(".modal-body").html("Some Error in Submitting Application");
                 $('#exampleModal').modal();
             }
         });

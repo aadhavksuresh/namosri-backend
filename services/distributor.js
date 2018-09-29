@@ -7,6 +7,7 @@ module.exports = {
             models.distributor.create(params).then(distributor => {
                 resolve(distributor.dataValues);
             }).catch(err => {
+                console.log(err);
                 reject(responseCodes.internalError);
             }); 
         });
