@@ -139,6 +139,26 @@ router.post("/one/instruction", (req, res) => {
         });
 });
 
+router.get('/one/distributor/:id', (req, res) => {
+    console.log(req.params.id);
+    res.render('distributors/one', {did: req.params.id});
+});
+
+router.post('/one/distributor', (req, res) => {
+    distributorService.getOneDistributor(req.body.id).then(distributor => {
+        response.header.code = responseCodes.ok;
+        response.body = {};
+        response.body.success = true;
+        response.body.result = distributor;
+        res.json(response);
+    }).catch(err => {
+        response.header.code = err;
+        response.body = {};
+        response.body.success = false;
+        res.json(response);
+    });
+});
+
 
 // router.post("/one/instructions", (req, res) => {
 //     instructionService.getOneInstruction(req.body.id).then(instruction => {

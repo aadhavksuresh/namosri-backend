@@ -85,7 +85,7 @@ module.exports = {
                 reject(responseCodes.internalError);
             })
         });
-    }  ,
+    },
     getInstructionByPid: function (pid) {
          return new Promise((resolve, reject) => {
             if(!pid){

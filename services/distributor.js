@@ -37,4 +37,17 @@ module.exports = {
             }
         });
     },
+    getOneDistributor: function(id){
+        return new Promise((resolve, reject) => {
+            models.distributor.findOne({
+                where: {
+                    id: id
+                }
+            }).then(distributor => {
+                resolve(distributor);
+            }).catch(err => {
+                reject(responseCodes.internalError);
+            })
+        });
+    }
 };

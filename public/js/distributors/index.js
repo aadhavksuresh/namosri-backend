@@ -67,6 +67,10 @@ $(document).ready(function() {
                                                 "'>Delete</a><a id="+distributor.id+">See</a></div>"
                                         );
 
+                                        $("#"+distributor.id).click(function(){
+                                            window.location.href = '/get/one/distributor/'+distributor.id;
+                                        });
+
                                         $("#distributor" + distributor.id).on(
                                             "click",
                                             function() {
