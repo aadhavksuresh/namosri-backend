@@ -5,6 +5,7 @@ var recipe = require('./recipe');
 var instructions = require('./instructions');
 var connection = require('./connection');
 var distributor = require('./distributor');
+var requestProduct = require('./requestForProduct')
 
 var models = {
     user : user,
@@ -13,7 +14,8 @@ var models = {
     recipe: recipe,
     instructions: instructions,
     distributor: distributor,
-    Op: connection.Sequelize.Op
+    Op: connection.Sequelize.Op,
+    requestProduct : requestProduct
 };
 
 module.exports = models;

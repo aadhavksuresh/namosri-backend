@@ -13,7 +13,7 @@ var User = connection.sequelize.define('user', {
 		unique: true
 	},
 	password: {
-		type: connection.Sequelize.STRING,
+		type: connection.Sequelize.TEXT,
 		allowNull: false
 	},
 	deactivated: {
