@@ -6,6 +6,7 @@ var responseCodes = require('../models/responseCodes');
 var recipeService = require('../services/recipe');
 var productServices = require('../services/products');
 var instructionService = require('../services/instructions');
+var distributorService = require("../services/distributor");
 
 /* GET add listing. */
 router.get('/', function(req, res, next) {
@@ -105,6 +106,20 @@ router.post('/instruction', (req, res) => {
     }).catch(err => {
         response.header.code = err;
         response.body = {};
+        response.body.success = false;
+        res.json(response);
+    });
+});
+
+
+router.post('/dis', (req, res) => {
+    distributorService.addDistributor(req.body).then(distributor => {
+        response.header.code = responseCodes.ok;
+        response.body.success = true;
+        response.body.result = distributor;
+        res.json(response);
+    }).catch(err => {
+        response.header.code = err;
         response.body.success = false;
         res.json(response);
     });
