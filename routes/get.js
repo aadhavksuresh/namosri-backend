@@ -154,6 +154,14 @@ router.post('/one/distributor', (req, res) => {
         response.body.result = distributor;
         res.json(response);
     }).catch(err => {
+        response.header.code = err;
+        response.body = {};
+        response.body.success = false;
+        res.json(response);
+    });
+});
+
+
 router.post("/all/requests", (req, res) => {
     tokenizer.varifyUser(req.body.token).then(user => {
         requestProductService
