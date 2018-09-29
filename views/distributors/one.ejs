@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--Import materialize.css-->
+  <link type="text/css" rel="stylesheet" href="/libs/materialize.min.css" media="screen,projection" />
+
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recipe update page</title>
+
+  <style>
+    table > tbody > tr > td {
+      text-align: center;
+      width: 100px;
+      border-right: 2px solid white;
+      border-left: 2px solid white;
+    }
+  </style>
+  <link rel="stylesheet" href="/css/recipe/update.css">
+  <%- include partials/loadercss %>
+</head>
+
+<body>
+
+  <%- include partials/loader %>
+  <div id="did" hidden>
+    <%- did %>
+  </div>
+
+  <div class="main container">
+    <h3 class="center-align">Details</h3>
+    <table class="striped highlight" style="margin-bottom: 50px;">
+      <tbody>
+        <tr>
+          <td>Name Of Firm</td>
+          <td id="nameOfFirm"></td>
+        </tr>
+        <tr>
+          <td>Background Of Company</td>
+          <td id="background"></td>
+        </tr>
+        <tr>
+          <td>Address</td>
+          <td id="address"></td>
+        </tr>
+        <tr>
+          <td>City</td>
+          <td id="city"></td>
+        </tr>
+        <tr>
+          <td>Infrastructure</td>
+          <td id="infrastructure"></td>
+        </tr>
+        <tr>
+          <td>State</td>
+          <td id="state"></td>
+        </tr>
+        <tr>
+          <td>Pin</td>
+          <td id="pin"></td>
+        </tr>
+        <tr>
+          <td>Infrastructure Can Provide</td>
+          <td id="infrastructure1"></td>
+        </tr>
+        <tr>
+          <td>Telephone Number</td>
+          <td id="telephoneNumber"></td>
+        </tr>
+        <tr>
+          <td>Mobile Number</td>
+          <td id="mobileNumber"></td>
+        </tr>
+        <tr>
+          <td>Fax Number</td>
+          <td id="faxNumber"></td>
+        </tr>
+        <tr>
+          <td>Email Id</td>
+          <td id="emailId"></td>
+        </tr>
+        <tr>
+          <td>Year Of Establishment</td>
+          <td id="yearOfEstabilshment"></td>
+        </tr>
+        <tr>
+          <td>Business Type</td>
+          <td id="businessType"></td>
+        </tr>
+        <tr>
+          <td>Annual Sales</td>
+          <td id="annualSales"></td>
+        </tr>
+        <tr>
+          <td>Capacity To Invest</td>
+          <td id="capacityToInvest"></td>
+        </tr>
+        <tr>
+          <td>Key Person</td>
+          <td id="keyPerson"></td>
+        </tr>
+        <tr>
+          <td>Name</td>
+          <td id="name"></td>
+        </tr>
+        <tr>
+          <td>Existing Manpower</td>
+          <td id="existingManpower"></td>
+        </tr>
+        <tr>
+          <td>Age</td>
+          <td id="age"></td>
+        </tr>
+        <tr>
+          <td>Qualification</td>
+          <td id="qualification"></td>
+        </tr>
+        <tr>
+          <td>Propose To Market DeliSpices</td>
+          <td id="propose"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <%- include partials/errors %>
+
+  <!--JavaScript at end of body for optimized loading-->
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+  <script type="text/javascript" src="/js/libs/materialize.min.js"></script>
+  <script src="/js/distributors/one.js"></script>
+</body>
+
+</html>

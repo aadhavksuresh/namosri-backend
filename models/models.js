@@ -4,6 +4,7 @@ var products = require('./products');
 var recipe = require('./recipe');
 var instructions = require('./instructions');
 var connection = require('./connection');
+var distributor = require('./distributor');
 var requestProduct = require('./requestForProduct')
 
 var models = {
@@ -12,6 +13,7 @@ var models = {
     products: products,
     recipe: recipe,
     instructions: instructions,
+    distributor: distributor,
     Op: connection.Sequelize.Op,
     requestProduct : requestProduct
 };

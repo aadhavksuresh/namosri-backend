@@ -147,7 +147,7 @@
       All Fields are mandatory*
     </p>
     <h3>DéliSpices Distributor Form </h3>
-      <form>
+      <form class="distributorForm">
           <div class="row">
             <div class="col-6">
               <input type="text" class="form-control" id="newtf1" placeholder="Name of the firm">
@@ -175,7 +175,7 @@
                   <input type="text" class="form-control" id="newtf6" placeholder="State">
                 </div>
                 <div class="col-3">
-                    <input type="text" class="form-control" id="newtf7" placeholder="Pin">
+                    <input type="number" class="form-control" id="newtf7" placeholder="Pin">
                 </div>
                 <div class="col-6">
                     <textarea class="input1" rows="2" cols="63" id="newtf8" placeholder="Infrastructure Can Provide" ></textarea>
@@ -184,25 +184,25 @@
               <br>
               <div class="row">
                   <div class="col-3">
-                    <input type="text" class="form-control" id="newtf9" placeholder="Telephone Number">
+                    <input type="tel" class="form-control" id="newtf9" placeholder="Telephone Number">
                   </div>
                   <div class="col-3">
-                      <input type="text" class="form-control" id="newtf10" placeholder="Mobile Number">
-                  </div>
-
-                  <div class="col-3">
-                      <input type="text" class="form-control" id="newtf11" placeholder="Fax No. ">
+                      <input type="tel" class="form-control" id="newtf10" placeholder="Mobile Number">
                   </div>
 
                   <div class="col-3">
-                      <input type="text" class="form-control" id="newtf12" placeholder="Email ID">
+                      <input type="number" class="form-control" id="newtf11" placeholder="Fax No. ">
+                  </div>
+
+                  <div class="col-3">
+                      <input type="email" class="form-control" id="newtf12" placeholder="Email ID">
                   </div>
                   
                 </div> 
                   <br>
                 <div class="row">
                     <div class="col-3">
-                      <input type="text" class="form-control"id="newtf13" placeholder="Year of Establishment">
+                      <input type="number" class="form-control"id="newtf13" placeholder="Year of Establishment">
                     </div>
                     <div class="col-3">
                         <input type="text" class="form-control" id="newtf14" placeholder="Business Type">
@@ -232,7 +232,7 @@
 
                       <div class="row">
                           <div class="col-3">
-                            <input type="text" class="form-control" id="newtf20" placeholder="Age">
+                            <input type="number" class="form-control" id="newtf20" placeholder="Age">
                           </div>
                           <div class="col-3">
                               <input type="text" class="form-control" id="newtf21" placeholder="Qualification">
@@ -242,10 +242,30 @@
                           </div>
                         </div>
                         <br>
-                        <center>
-                          <button type="submit" class="btn btn-primary">Submit Your Application</input>
-                        </center>
+                          <button type="submit" class="btn btn-primary text-center">Submit Your Application</button>
+                        
       </form>
+      
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Successfully</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" data-dismiss="modal">Okay</button>
+            </div>
+          </div>
+        </div>
+      </div>
 </div>
 
 </section>
@@ -253,6 +273,8 @@
     <footer id="footer">
            <%include includes/footer.ejs%>
     </footer><!-- #footer -->
-
+    <script src="lib/jquery/jquery.min.js"></script>
+    <script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main site/distributorForm.js"></script>
 </body>
 </html>
