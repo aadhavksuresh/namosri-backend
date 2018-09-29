@@ -9,7 +9,7 @@ var Distributor = connection.sequelize.define('distributor', {
     },
     nameOfFirm: {
         type: connection.Sequelize.STRING,
-        
+        unique: true
     },
     background: {
         type: connection.Sequelize.STRING,

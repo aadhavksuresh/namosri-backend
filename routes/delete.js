@@ -2,6 +2,7 @@ let router = require('express').Router();
 let productServices = require('../services/products');
 let recipeServices = require('../services/recipe');
 let instructionServices = require('../services/instructions');
+let distributorServices = require("../services/distributor");
 let response = require('../models/response');
 let responseCodes = require('../models/responseCodes');
 let tokenizer = require("../services/tokenizer");
@@ -68,6 +69,29 @@ router.post('/instruction', (req, res) => {
             response.body = {};
             response.body.success = true;
             response.body.result = insturction;
+            res.json(response);
+        }).catch(err => {
+            response.header.code = err;
+            response.body = {};
+            response.body.success = false;
+            res.json(response);
+        });
+    }).catch(err => {
+        response.header.code = err;
+        response.body = {};
+        response.body.success = false;
+        res.json(response);
+    });
+});
+
+router.post('/distributor', (req, res) => {
+    let params = req.body;
+    tokenizer.varifyUser(params.token).then(user => {
+        distributorServices.deleteDistributor(params).then(distributor => {
+            response.header.code = responseCodes.ok;
+            response.body = {};
+            response.body.success = true;
+            response.body.result = distributor;
             res.json(response);
         }).catch(err => {
             response.header.code = err;

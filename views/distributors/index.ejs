@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--Import materialize.css-->
+  <link type="text/css" rel="stylesheet" href="/libs/materialize.min.css" media="screen,projection" />
+
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Distributor's Requests Page</title>
+  <link rel="stylesheet" href="/css/admin/index.css">
+  <%- include partials/loadercss %>
+</head>
+
+<body>
+  <%- include partials/loader %>
+  <div class="row main">
+    <h3 class="center-align">Distributor's Requests</h3>
+    <div class="row">          
+        <div class="col s12" id="distributors-row">
+            <!-- <h3>Products</h3> -->
+        </div>
+    </div>
+    <div class="info"></div>
+  </div>
+  <!-- <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a> -->
+
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    <div class="modal-content distributor-content">
+      <h4 class="black-text">Modal Header</h4>
+      <p class="black-text">Are You Sure !!!</p>
+    </div>
+    <div class="modal-footer">
+      <a href="#" class="modal-close waves-effect waves-green btn-flat agree-btn">Agree</a>
+    </div>
+  </div>
+  
+  <%- include partials/errors %>
+
+  <!--JavaScript at end of body for optimized loading-->
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+  <script type="text/javascript" src="/js/libs/materialize.min.js"></script>
+  <script src="/js/distributors/index.js"></script>
+</body>
+
+</html>

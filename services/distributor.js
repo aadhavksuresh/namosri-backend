@@ -10,5 +10,31 @@ module.exports = {
                 reject(responseCodes.internalError);
             }); 
         });
-    }
+    },
+    getAllDistributors: function(){
+        return new Promise((resolve, reject) => {
+            models.distributor.findAll().then(distributor => {
+                resolve(distributor);
+            }).catch(err => {
+                reject(responseCodes.internalError);
+            })
+        });
+    },
+    deleteDistributor: function(params){
+        return new Promise((resolve, reject) => {
+            if(!params.name){
+                reject(responseCodes.invalidRequest);
+            } else {
+                models.distributor.destroy({
+                    where: {
+                        nameOfFirm: params.name
+                    }
+                }).then(() => {
+                    resolve(responseCodes.ok);
+                }).catch(err => {
+                    reject(responseCodes.internalError);
+                });
+            }
+        });
+    },
 };

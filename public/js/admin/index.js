@@ -17,6 +17,9 @@ $(document).ready(function() {
             },
             success: function(result) {
                 if (result.body.success) {
+                    $(".distributor-requests").click(function(){
+                        window.location.href = '/get/all/distributors';
+                    });
                     $(".agree-btn").on("click", function() {
                         deleteProduct($(".product-content > h4").html());
                     });
