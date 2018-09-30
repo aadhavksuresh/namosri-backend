@@ -1,7 +1,6 @@
 $(document).ready(function() {
     // let modal=new M.Modal($("#modal1"));
     if (window.localStorage.getItem("authToken")) {
-
         $.ajax({
             url: "/user/verifier",
             method: "POST",
@@ -11,7 +10,9 @@ $(document).ready(function() {
             success: function(result) {
                 if (result.body.success) {
                     $(".agree-btn").on("click", function() {
-                        deleteDistributos($(".distributor-content > h4").html());
+                        deleteDistributos(
+                            $(".distributor-content > h4").html()
+                        );
                     });
 
                     function deleteDistributos(distributorName) {
@@ -48,7 +49,6 @@ $(document).ready(function() {
                             url: "/get/all/distributors",
                             method: "POST",
                             success: function(result) {
-                                console.log(result);
                                 if (result.body.success) {
                                     $(".loader").css("display", "none");
                                     $(".main").css("display", "block");
@@ -56,32 +56,36 @@ $(document).ready(function() {
                                     var distributors = result.body.result;
 
                                     distributors.forEach(distributor => {
-                                        
                                         // productObj[product.productId] = product.name;
 
                                         $("#distributors-row").append(
-                                            "<div class='col s12 m4'><div class='card blue-grey darken-1'><div class='card-content white-text'> <span class='card-title'>" +
+                                            "<div class='col s12 m3'><div class='card blue-grey darken-1'><div class='card-content white-text'> <span class='card-title'>" +
                                                 distributor.nameOfFirm +
                                                 "</span></div> <div class='card-action'><a href='#' id='distributor" +
                                                 distributor.id +
-                                                "'>Delete</a><a id="+distributor.id+">See</a></div>"
+                                                "'>Delete</a><a id=" +
+                                                distributor.id +
+                                                ">See</a></div>"
                                         );
 
-                                        $("#"+distributor.id).click(function(){
-                                            window.location.href = '/get/one/distributor/'+distributor.id;
-                                        });
+                                        $("#" + distributor.id).click(
+                                            function() {
+                                                window.location.href =
+                                                    "/get/one/distributor/" +
+                                                    distributor.id;
+                                            }
+                                        );
 
                                         $("#distributor" + distributor.id).on(
                                             "click",
                                             function() {
-                                                $(".distributor-content > h4").html(
-                                                    distributor.nameOfFirm
-                                                );
+                                                $(
+                                                    ".distributor-content > h4"
+                                                ).html(distributor.nameOfFirm);
                                                 // $(".agree-btn").attr("id" , product.productId +"agree");
                                                 $("#modal1")
                                                     .modal()
                                                     .modal("open");
-                                                console.log("anc");
                                             }
                                         );
                                     });
@@ -96,6 +100,46 @@ $(document).ready(function() {
                     }
                     getDistributors();
 
+                    function getGetInTouch() {
+                        $.ajax({
+                            url: "/get/all/getintouches",
+                            method: "POST",
+                            success: function(result) {
+                                if (result.body.success) {
+                                    $(".loader").css("display", "none");
+                                    $(".main").css("display", "block");
+                                    $(".errors").css("display", "none");
+                                    var getInTouches = result.body.result;
+
+                                    getInTouches.forEach(getInTouch => {
+                                        // productObj[product.productId] = product.name;
+
+                                        $("#getInTouches-row").append(
+                                            "<div class='col s12 m3'><div class='card blue-grey darken-1'><div class='card-content white-text'> <span class='card-title'>" +
+                                                getInTouch.title +
+                                                "</span></div> <div class='card-action'><a href='#' id='getInTouch" +
+                                                getInTouch.id +
+                                                "'>See</a></div>"
+                                        );
+
+                                        $("#getInTouch" + getInTouch.id).click(
+                                            function() {
+                                                window.location.href =
+                                                    "/get/one/getInTouch/" +
+                                                    getInTouch.id;
+                                            }
+                                        );
+                                    });
+                                } else {
+                                    console.log("incorrect");
+                                }
+                            },
+                            error: function(err) {
+                                console.log("error can't make the request");
+                            }
+                        });
+                    }
+                    getGetInTouch();
                 } else {
                     window.localStorage.removeItem("authToken");
                     $(".loader").css("display", "none");
@@ -105,15 +149,17 @@ $(document).ready(function() {
             },
             error: function(err) {
                 window.localStorage.removeItem("authToken");
-                $('.errors').text("Either the Server is down or Check Your internet connectivity");
-                $('.loader').css("display", "none");
-                $('.main').css("display", "none");
-                $('.errors').css("display", "block");
-            }            
-        })
-} else {
-    $('.loader').css("display", "none");
-    $('.main').css("display", "none");
-    $('.errors').css("display", "block");
-}
+                $(".errors").text(
+                    "Either the Server is down or Check Your internet connectivity"
+                );
+                $(".loader").css("display", "none");
+                $(".main").css("display", "none");
+                $(".errors").css("display", "block");
+            }
+        });
+    } else {
+        $(".loader").css("display", "none");
+        $(".main").css("display", "none");
+        $(".errors").css("display", "block");
+    }
 });

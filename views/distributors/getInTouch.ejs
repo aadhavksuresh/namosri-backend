@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="/libs/materialize.min.css" media="screen,projection" />
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Get In Touch Page</title>
+
+    <style>
+        table > tbody > tr > td {
+      text-align: center;
+      width: 100px;
+      border-right: 2px solid white;
+      border-left: 2px solid white;
+    }
+  </style>
+    <link rel="stylesheet" href="/css/recipe/update.css">
+    <%- include partials/loadercss %>
+</head>
+
+<body>
+
+    <%- include partials/loader %>
+    <div id="gid" hidden>
+        <%- gid %>
+    </div>
+
+    <div class="main container">
+        <h3 class="center-align">Details</h3>
+        <table class="striped" style="margin-bottom: 50px;">
+            <tbody>
+                <tr>
+                    <td>Title</td>
+                    <td id="title"></td>
+                </tr>
+                <tr>
+                    <td>First Name</td>
+                    <td id="fName"></td>
+                </tr>
+                <tr>
+                    <td>Last Name</td>
+                    <td id="lName"></td>
+                </tr>
+                <tr>
+                    <td>Company</td>
+                    <td id="company"></td>
+                </tr>
+                <tr>
+                    <td>Designation</td>
+                    <td id="designation"></td>
+                </tr>
+                <tr>
+                    <td>Mobile</td>
+                    <td id="mobile"></td>
+                </tr>
+                <tr>
+                    <td>Type Of Business</td>
+                    <td id="typeOfBusiness"></td>
+                </tr>
+                <tr>
+                    <td>Address</td>
+                    <td id="address"></td>
+                </tr>
+                <tr>
+                    <td>Your Message</td>
+                    <td id="yourMessage"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <%- include partials/errors %>
+
+    <!--JavaScript at end of body for optimized loading-->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <script type="text/javascript" src="/js/libs/materialize.min.js"></script>
+    <script src="/js/distributors/getInTouch.js"></script>
+</body>
+
+</html>

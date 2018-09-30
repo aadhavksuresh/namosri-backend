@@ -6,6 +6,7 @@ var recipeService = require("../services/recipe");
 var productService = require("../services/products");
 var instructionService = require("../services/instructions");
 var distributorService = require("../services/distributor");
+var getInTouchService = require("../services/getInTouch");
 
 /* GET add listing. */
 router.get("/all/distributors", (req, res) => {
@@ -49,18 +50,21 @@ router.post("/all/recipe", (req, res) => {
 });
 
 router.post("/all/instruction", (req, res) => {
-    instructionService.getAllInstruction().then(instructions => {
-        response.header.code = responseCodes.ok;
-        response.body = {};
-        response.body.success = true;
-        response.body.result = instructions;
-        res.json(response);
-    }).catch(err => {
-        response.header.code = err;
-        response.body = {};
-        response.body.success = false;
-        res.json(response);
-    });
+    instructionService
+        .getAllInstruction()
+        .then(instructions => {
+            response.header.code = responseCodes.ok;
+            response.body = {};
+            response.body.success = true;
+            response.body.result = instructions;
+            res.json(response);
+        })
+        .catch(err => {
+            response.header.code = err;
+            response.body = {};
+            response.body.success = false;
+            res.json(response);
+        });
 });
 
 router.post("/all/distributors", (req, res) => {
@@ -71,6 +75,24 @@ router.post("/all/distributors", (req, res) => {
             response.body = {};
             response.body.success = true;
             response.body.result = distributor;
+            res.json(response);
+        })
+        .catch(err => {
+            response.header.code = err;
+            response.body = {};
+            response.body.success = false;
+            res.json(response);
+        });
+});
+
+router.post("/all/getintouches", (req, res) => {
+    getInTouchService
+        .getAllGetInTouch()
+        .then(getInTouches => {
+            response.header.code = responseCodes.ok;
+            response.body = {};
+            response.body.success = true;
+            response.body.result = getInTouches;
             res.json(response);
         })
         .catch(err => {
@@ -139,26 +161,51 @@ router.post("/one/instruction", (req, res) => {
         });
 });
 
-router.get('/one/distributor/:id', (req, res) => {
+router.get("/one/distributor/:id", (req, res) => {
     console.log(req.params.id);
-    res.render('distributors/one', {did: req.params.id});
+    res.render("distributors/one", { did: req.params.id });
 });
 
-router.post('/one/distributor', (req, res) => {
-    distributorService.getOneDistributor(req.body.id).then(distributor => {
-        response.header.code = responseCodes.ok;
-        response.body = {};
-        response.body.success = true;
-        response.body.result = distributor;
-        res.json(response);
-    }).catch(err => {
-        response.header.code = err;
-        response.body = {};
-        response.body.success = false;
-        res.json(response);
-    });
+router.post("/one/distributor", (req, res) => {
+    distributorService
+        .getOneDistributor(req.body.id)
+        .then(distributor => {
+            response.header.code = responseCodes.ok;
+            response.body = {};
+            response.body.success = true;
+            response.body.result = distributor;
+            res.json(response);
+        })
+        .catch(err => {
+            response.header.code = err;
+            response.body = {};
+            response.body.success = false;
+            res.json(response);
+        });
 });
 
+router.get("/one/getInTouch/:id", (req, res) => {
+    console.log(req.params.id);
+    res.render("distributors/getInTouch", { gid: req.params.id });
+});
+
+router.post("/one/getInTouch", (req, res) => {
+    getInTouchService
+        .getOneGetInTouch(req.body.id)
+        .then(getInTouch => {
+            response.header.code = responseCodes.ok;
+            response.body = {};
+            response.body.success = true;
+            response.body.result = getInTouch;
+            res.json(response);
+        })
+        .catch(err => {
+            response.header.code = err;
+            response.body = {};
+            response.body.success = false;
+            res.json(response);
+        });
+});
 
 // router.post("/one/instructions", (req, res) => {
 //     instructionService.getOneInstruction(req.body.id).then(instruction => {

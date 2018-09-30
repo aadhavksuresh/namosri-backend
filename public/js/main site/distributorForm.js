@@ -1,6 +1,43 @@
-$("document").ready(function(){
+$("document").ready(function() {
     console.log("yeepee");
-    $(".distributorForm").submit(function(e){
+    $(".getInTouch").submit(function(e) {
+        e.preventDefault();
+        var title = $("#tf1").val();
+        var fName = $("#tf2").val();
+        var lName = $("#tf3").val();
+        var company = $("#tf4").val();
+        var designation = $("#tf5").val();
+        var mobile = $("#tf6").val();
+        var typeOfBusiness = $("#tf7").val();
+        var address = $("#tf8").val();
+        var country = $("#tf9").val();
+        var yourMessage = $("#tf10").val();
+
+        $.ajax({
+            url: "/add/getInTouch",
+            method: "POST",
+            data: {
+                title: title,
+                fName: fName,
+                lName: lName,
+                company: company,
+                designation: designation,
+                mobile: mobile,
+                typeOfBusiness: typeOfBusiness,
+                address: address,
+                country: country,
+                yourMessage: yourMessage
+            },
+            success: function(result) {
+                console.log(result);
+            },
+            error: function(err) {
+                console.log("can't make the request");
+            }
+        });
+    });
+
+    $(".distributorForm").submit(function(e) {
         e.preventDefault();
         var nameOfFirm = $("#newtf1").val();
         var background = $("#newtf2").val();
@@ -26,7 +63,7 @@ $("document").ready(function(){
         var propose = $("#newtf22").val();
 
         $.ajax({
-            url: '/add/dis',
+            url: "/add/dis",
             method: "post",
             data: {
                 nameOfFirm: nameOfFirm,
@@ -50,17 +87,16 @@ $("document").ready(function(){
                 existingManpower: existingManpower,
                 age: age,
                 qualification: qualification,
-                propose: propose,
+                propose: propose
             },
-            success: function(result){
+            success: function(result) {
                 $(".modal-body").html("Distributor Added Successfully");
-                $('#exampleModal').modal();
+                $("#exampleModal").modal();
             },
-            error: function(err){
+            error: function(err) {
                 $(".modal-body").html("Some Error in Adding the Distributor");
-                $('#exampleModal').modal();
+                $("#exampleModal").modal();
             }
         });
-      
     });
 });
