@@ -6,6 +6,7 @@ var instructions = require("./instructions");
 var connection = require("./connection");
 var distributor = require("./distributor");
 var getInTouch = require("./getInTouch");
+var requestProduct = require("./requestForProduct");
 
 var models = {
     user: user,
@@ -15,6 +16,7 @@ var models = {
     instructions: instructions,
     distributor: distributor,
     getInTouch: getInTouch,
+    requestProduct: requestProduct,
     Op: connection.Sequelize.Op
 };
 

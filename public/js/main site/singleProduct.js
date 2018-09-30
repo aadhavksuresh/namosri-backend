@@ -1,6 +1,31 @@
-console.log("nk");      
 $(document).ready(function(){  
    var i = 0;
+   $("#requestForm").submit(function(e){ 
+        e.preventDefault();
+        $.ajax({
+        url: "/request/product",
+        method: "POST",
+        data: {
+            productId :  $("#pid").html(),
+            mobile: $("#tf4").val(),
+            address: $("#tf5").val(),
+            name: $("#tf3").val()
+        },
+        success: function(result){
+        
+            if(result.body.success){
+               $("#requestBtn").html("Your Request is Received by Us");
+               $("#requestBtn").attr("disabled" , "");
+            }
+        },
+        error: function(err){
+            console.log("error can't make the request");
+        }
+    });  
+   });
+
+
+
     $.ajax({
         url: "/get/one/product",
         method: "POST",
@@ -42,7 +67,6 @@ $(document).ready(function(){
             productId :  $("#pid").html() 
         },
         success: function(result){
-        
             if(result.body.success){
                 // console.log(result.body);
                 var inst = $(".instructions");

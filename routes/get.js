@@ -7,6 +7,8 @@ var productService = require("../services/products");
 var instructionService = require("../services/instructions");
 var distributorService = require("../services/distributor");
 var getInTouchService = require("../services/getInTouch");
+var requestProductService = require("../services/requestForProduct");
+let tokenizer = require("../services/tokenizer");
 
 /* GET add listing. */
 router.get("/all/distributors", (req, res) => {
@@ -206,6 +208,49 @@ router.post("/one/getInTouch", (req, res) => {
             res.json(response);
         });
 });
+router.post("/all/requests", (req, res) => {
+    tokenizer.varifyUser(req.body.token).then(user => {
+        requestProductService
+            .getAllRequestsForProduct()
+            .then(request => {
+                response.header.code = responseCodes.ok;
+                response.body = {};
+                response.body.success = true;
+                response.body.result = request;
+                res.json(response);
+            })
+            .catch(err => {
+                response.header.code = err;
+                response.body = {};
+                response.body.success = false;
+                res.json(response);
+            });
+        }).catch(err => {
+        response.header.code = err;
+        response.body = {};
+        response.body.success = false;
+        res.json(response);
+    });
+});
+
+router.post("/one/request", (req, res) => {
+    // console.log(req.body.productId);
+    requestProductService
+        .getAllRequestsForProduct()
+        .then(request => {
+            response.header.code = responseCodes.ok;
+            response.body = {};
+            response.body.success = true;
+            response.body.result = request;
+            res.json(response);
+        })
+        .catch(err => {
+            response.header.code = err;
+            response.body = {};
+            response.body.success = false;
+            res.json(response);
+        });
+});
 
 // router.post("/one/instructions", (req, res) => {
 //     instructionService.getOneInstruction(req.body.id).then(instruction => {
@@ -223,5 +268,8 @@ router.post("/one/getInTouch", (req, res) => {
 //         res.json(response);
 //     });
 // });
+
+
+
 
 module.exports = router;
