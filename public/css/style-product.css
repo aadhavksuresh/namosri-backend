@@ -130,29 +130,6 @@ body {
     }
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*--------------------------------------------------------------
 # Navigation Menu
 --------------------------------------------------------------*/
@@ -488,11 +465,11 @@ body {
 
 
 #samplesection h3{
-  padding-left: 27%;
+  padding-left: 28%;
 }
 
 #samplesection form{
-  padding-left: 23%;
+  padding-left: 20%;
 }
 
 .form-control::-webkit-input-placeholder { color: black; }
@@ -700,9 +677,4 @@ body {
     text-align: center;
     font-size: 13px;
     color: #ddd;
-  }
-
-
-  #products img{
-    padding-left: 25%;
   }
