@@ -29,10 +29,12 @@ $("document").ready(function() {
                 yourMessage: yourMessage
             },
             success: function(result) {
-                console.log(result);
+                $(".modal-body").html("Request Submit Successfully");
+                $("#exampleModal").modal();
             },
             error: function(err) {
-                console.log("can't make the request");
+                $(".modal-body").html("Some Error Occured");
+                $("#exampleModal").modal();
             }
         });
     });
